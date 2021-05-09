@@ -1,0 +1,127 @@
+{% extends "base.html.twig" %} 
+{% block titre %} Ajout Films {% endblock %}
+{% block contenue %}
+
+{% if message|length >0 %}
+    <div class="alert alert-{{message.type}}" role="alert">
+        {{message.contenu}}
+    </div>
+{% endif %} 
+
+           <table class="table text-center monTableau " id="tableauLivres">
+               <thead>
+               <tr class="table-active text-light ml-4 ">
+                   <th>Image</th>
+                   <th>Titre</th>
+                   <th>Synopsys</th>
+                   <th>Acteur</th>
+                   <th>Annee</th>
+                   <th>Categorie</th>
+                   <th>Link</th>
+                   <th colspan="2">Actions</th>
+               </tr>  
+            </thead>
+            <tbody>
+            {% for film in liste %}
+                <tr class="text-light"> 
+                    <td class="align-middle"><img src="images/{{film.image}}"width="100px"</td>
+                    <td class="align-middle"><a href="/admin_film/{{film._id}}">{{film.titre}}</td>
+                    <td class="align-middle">{{ (film.synopsys|length > 30 ? film.synopsys|slice(0, 30) ~ '…' : film.synopsys) }}</td>
+                    <td class="align-middle"><a href="/acteurs/{{film.acteur[0]._id}}">{{film.acteur[0].nom}} - {{film.acteur[0].prenom}}</a></td>
+                    <td class="align-middle">{{film.annee.annee}}</td>
+                    <td class="align-middle">{{film.categorie.libelle}}</td>
+                    <td class="align-middle">{{ (film.Bdannonce|length > 10 ? film.Bdannonce|slice(0, 10) ~ '…' : film.Bdannonce) }}</td>
+                    <td><a href="/admin_film/modification/{{film.id}}" class="btn btn-warning">Modifier</a></td>
+                    <td>
+                        <form method="POST" action="/admin_film/delete/{{film.id}}" onSubmit="return confirm('Voulez-vous supprimer le livre ')">
+                        <button class="btn btn-danger"type="submit">Supprimer</button>
+                        </form>
+                    </td>
+                </tr> 
+
+            {% endfor %}
+            </tbody>           
+           </table>
+           <button onclick="afficherFormulaire()" class="btn btn-success w-100">Ajouter</button>
+           
+       <form action="" class="d-none" id="ajoutForm" method ="POST" enctype="multipart/form-data">
+            <fieldset class="text-light ">
+                <legend class="mt-5" style="margin-left:200px">Création d'un film</legend>
+                <div class="col-5 mt-3 mb-3" style="margin-left:200px">
+                    <label for="titre" class="form-label text-light">Titre film</label>
+                    <input type="text" class="form-control " id="titre"  name="titre" >
+                </div>
+                <div class="col-5  mb-3" style="margin-left:200px">
+                    <label for="Synopsys" class="form-label text-light">Synopsys</label>
+                    <textarea type="text" class="form-control" id="Synopsys" name="synopsys" rows="3"> </textarea>
+                </div>
+                <div class="col-5  mb-3" style="margin-left:200px">
+                    <label for="Annee" class="form-label text-light">Annee</label>
+                    {# <input type="Number" class="form-control" id="Annee" name="annee" > #}
+                     <select class="form-control" id="Annee" name="annee">
+                        {% for annee in listeAnnee %}
+                            <option value="{{annee._id}}">{{annee.annee}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                 <div class="col-1  mb-3" style="margin-left:200px">
+                    <label for="input_poste" class="form-label text-light">Ajouter Acteur <br>
+                    </label> <input class="multisteps-form__input form-control"
+                        id="nbcolis" name="nbcolis" value="0"
+                        onkeyup="set_colis(this.value)" />
+                </div>
+
+                <div class="col-4  mb-3"  id="colis_div"></div>
+
+                <div class="col-5  mb-3" style="margin-left:200px">
+                    <label for="Categorie" class="form-label text-light">Categorie</label>
+                     <select class="form-control" id="Categorie" name="categorie">
+                        {% for categorie in listeCategorie %}
+                            <option value="{{categorie._id}}">{{categorie.libelle}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-5 mt-3 mb-3" style="margin-left:200px">
+                    <label for="Bdannonce" class="form-label text-light">Link bande d'annonce</label>
+                    <input type="text" class="form-control " id="Bdannonce"  name="Bdannonce" >
+                </div>
+                <div class="col-5  mb-3" style="margin-left:200px">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control-file" id="image" name="image" multiple>
+                </div>
+                <div class="col-5  mb-3" style="margin-left:200px">
+                    <button  class="btn btn-primary" type="submit">Valider</button>
+                </div>
+            </fieldset>
+       </form>
+    
+    
+
+
+ <script src="/javascript/ajoutfilm.js"></script>
+<script>
+function set_colis(nb_colis) {
+    $('#colis_div').html('<dl class="table-display"><dt class="empty"></dt><dd></dd></dl>')
+      var colis_html = "";
+      for (var i = 0; i < nb_colis; i++) {
+    
+        colis_html += '<div class="col-5  mb-3" style="margin-left:200px">';
+        colis_html += ' <label for="Acteur" class="form-label text-light">Acteur</label>';
+        colis_html += ' <select class="form-control" id="acteur" name="acteur">';
+        colis_html += ' {% for acteur in listeActeur %}';
+        colis_html += '<option value="{{acteur._id}}">{{acteur.prenom}} - {{acteur.nom}}</option>';
+        colis_html += '<label for="input_poste" class="mb-3">Longueur(cm)*</label>';
+        colis_html += '{% endfor %}';
+        colis_html += '  </select>';
+        colis_html += '</div>';
+    
+    }
+    $('#colis_div').append(colis_html);
+    
+}
+</script>
+
+
+{% endblock %}
+ 

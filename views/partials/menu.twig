@@ -1,0 +1,50 @@
+<div class="sidenav">
+  {% if user %}
+
+    {% if user.role == "user"  %}
+     <a href="/users/pageUser">
+      <center><img src="/images/log.png" width="150px" height="160px"></center>
+      <center><img src="/images/{{user.image}}" width="70px"><p>{{user.username}}</p></center><br><br> 
+      </a>
+      <center><a href="/films">Films</a>
+      <a href="/films_new">Nouveau</a>
+      <a href="/acteurs">Acteurs</a>
+      <a href="/liste_salon">Salon</a>
+      <a href="/evenement">Evenement</a>
+      <a href="/users/logout">Deconexion</a></center>
+
+    {% else %} 
+     <a href="/users/pageUser">
+      <center><img src="/images/log.png" width="150px" height="160px"></center>
+      <center><img src="/images/user.png" width="70px"><p>{{user.username}}</p></center><br><br> 
+      </a>
+       <center><a href="/films">Films</a>
+      <a href="/films_new">Nouveau</a>
+      <a href="/acteurs">Acteurs</a>
+      <a href="/liste_salon">Salon</a> 
+      <a href="/admin_film">Admin_film</a></center>
+      <a href="/admin_acteur">Admin_acteur</a></center>
+      <a href="/categories">Categories</a></center>
+      <a href="/annees">Annees</a></center>
+      <a href="/admin_evenement">Evenement</a></center>
+      <a href="/users/logout">Deconexion</a></center>
+    {% endif %}
+  {% else %}
+   <center><img src="/images/logo.png" width="150px" height="160px"></center>
+      <center><a href="/films">Films</a>
+      <a href="/films_new">Nouveau</a>
+      <a href="/acteurs">Acteurs</a>
+      <a href="/liste_salon">Salon</a>
+      <a href="/evenement">Evenement</a>
+      
+  {% endif %}
+</div>
+
+<div class="container sticky-top " style="height:55px; margin-top: 20px;  display: flex; justify-content: space-between;background-color: #212121">
+  <form class="d-flex mt-1  mb-1" action="/films" methode="GET" >
+    <input class="form-control mr-sm-2 text-light" type="search" name="search" placeholder="Recherchez votre film &#xF002;"  style="background-color:#000; margin-left: 900px;  border-radius: 10px; font-family:Arial, FontAwesome">
+  </form> 
+  <a href="/users/login">
+    <i style="color: #ff6e40;height:50px;opacity: 0.8;" class="far fa-user fa-1x"></i>
+  </a>
+</div>

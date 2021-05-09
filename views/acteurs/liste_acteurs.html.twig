@@ -1,0 +1,91 @@
+{% extends "base.html.twig" %} 
+{% block titre %} acteur liste {% endblock %}
+{% block contenue %}
+
+<div class="container" style=" height: 1000px">
+    
+
+   <div class="container" style="width:1800px;padding:5px; height:1000px">
+        <div class="container" style=" height: 900px; width:1000px; float:left; ">
+            {% if noMatch != null  %}
+                <h3 class="text-light">{{ noMatch }}</h3>
+             {% endif %}
+            <div class="row row-cols-1 row-cols-md-4" id="pagination">
+                 {%  for acteur in listeacteur %}
+                <div class="col mb-4">
+                    <div class="card" style="background-color:#170B22;">
+                            <a href="/acteurs/{{acteur._id}}">
+                        <img src="/images/{{acteur.image}}"class="card-img-top">{{acteur.nom}}--{{acteur.prenom}}
+                            </a>
+                    </div>
+                </div>
+                {% endfor %}    
+            </div>
+             <center><div class="pagination" style="display: inline-block;">
+                <button type="button" class="btn btn-warning" onclick="precedent();">Retour</button>
+                <button type="button" class="btn btn-warning" onclick="suivant();">Suivant</button>
+                            
+            </div></center><br>
+
+        </div>
+    </div>
+       
+    <script>
+        var start =0;
+        var limit = 1;
+        function suivant(){
+            start = start+limit;
+            $.ajax({
+                url : "/acteurs/"+start+"/"+limit,
+                method:"GET",
+                success: function(
+                    reponse
+                ){
+                     console.log('bonjour');
+                    console.log(reponse);
+                    affichage_acteurs(reponse);
+                }
+            });
+        }
+
+        function precedent(){
+            start = start-limit;
+            $.ajax({
+                url : "/acteurs/"+start+"/"+limit,
+                method:"GET",
+                success: function(
+                    reponse
+                ){
+                    console.log(reponse);
+                    affichage_acteurs(reponse);
+                }
+            });
+        }
+
+
+        function affichage_acteurs(acteurs){
+            
+            if(acteurs.length> 0){    
+                var html = "";
+                for(var a= 0; a < acteurs.length; a++ ){
+
+                    html+='<div class="row row-cols-8 row-cols-md-4" id="pagination">';
+                            html+='<div class="col mb-4" style="width:100%">';
+                                html+='<div class="card" style="background-color:#170B22;">';
+                                        html+='<a href="/acteurs/'+acteurs[a]._id+'">';
+                                   html+=' <img src="/images/'+acteurs[a].image+'"class="card-img-top">"'+acteurs[a].nom+'"';
+                                        html+='</a>';
+                               html+=' </div>';
+                           html+=' </div>';
+                    html+='</div>';
+                    console.log(acteurs[a].images);
+                }
+                $('#pagination').html(html);
+            }
+            console.log('bonjour');
+        }
+    </script> 
+   
+</div>
+
+{% endblock %}

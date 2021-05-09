@@ -1,0 +1,126 @@
+{% extends "base.html.twig" %} 
+{% block titre %}Acteur {% endblock %}
+{% block contenue %}
+    {% if isModification %}
+        <form  method ="POST" action="/admin_acteur/modificationServer">
+            <fieldset>
+                <legend class="text-light">Modification d'un acteur</legend>
+                <div class="col-5 mt-3 mb-3 text-light" style="margin-left:200px">
+                    <label for="titre">Prénom</label>
+                    <input type="text" class="form-control" id="prenom" name="prenom"value="{{acteur.prenom}}" >
+                </div>
+                <div class="col-5 mt-3 mb-3 text-light" style="margin-left:200px">
+                    <label for="titre">Nom</label>
+                    <input type="text" class="form-control" id="nom" name="nom"value="{{acteur.nom}}" >
+                </div>
+                <div class="col-5 mt-3 mb-3 text-light" style="margin-left:200px">
+                    <label for="date_naissance">date_naissance</label>
+                    <input type="date" class="form-control" id="date_naissance" name="date_naissance" value="{{acteur.date_naissance}}" >
+                </div>
+                    <div class="col-5 mt-3 mb-3 text-light" style="margin-left:200px">
+                    <label for="nationalite">nationalite</label>
+                    <input type="texte" class="form-control" id="nationalite" name="nationalite"value="{{acteur.nationalite}}" >
+                </div>
+                <div class="form-check col-5 mt-3 mb-3 text-light" style="margin-left:200px">
+                    <input class="form-check-input" type="checkbox" id="cesar"name="cesar"
+                     {% if acteur.cesar %} checked {% endif %}
+                    >
+                    <label class="form-check-label" for="flexCheckChecked">
+                        cesar
+                    </label>
+                </div>
+                <div class="form-check col-5 mt-3 mb-3 text-light" style="margin-left:200px">
+                    <input class="form-check-input" type="checkbox" id="oscar"name="oscar"
+                      {% if acteur.oscar %} checked {% endif %}
+                    >
+                    <label class="form-check-label" for="flexCheckChecked">
+                        oscar
+                    </label>
+                </div>
+                <div class="form-check col-5 mt-3 mb-3 text-light" style="margin-left:200px">
+                    <input class="form-check-input" type="checkbox" id="golden"name="golden"
+                       {% if acteur.golden %} checked {% endif %}
+                    >
+                    <label class="form-check-label" for="flexCheckChecked">
+                        golden_globes
+                    </label>
+                </div>
+                <div class="col-5 mt-3 mb-3 text-light" style="margin-left:200px">
+                    <label for="biographie">biographie</label>
+                        <textarea class="form-control" id="biographie" name="biographie"  rows="5" cols="33">{{acteur.biographie}}</textarea>
+                </div>
+               
+                <input type="hidden" name="identifiant" value="{{acteur._id}}">
+                <input type="submit" class="btn btn-primary w-100" value="Valider">
+            </fieldset>
+        </form>
+        <form method="POST" action="/admin_acteur/updateImage" enctype="multipart/form-data">
+            <input type="hidden" name="identifiant" value="{{acteur._id}}">
+            <h2 style="margin-left:100px">Images : </h2>
+            <div class="row"style="margin-left:100px">
+                <img src="/images/{{acteur.image}}" class="col-3">
+                <div class="col-9">
+                    <div class="form-group">
+                        <label for="image">Image</label> <br>
+                        <input type="file" class="form-control-file" id="image" name="image">
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Modifier l'image">
+                </div>
+            </div>
+        </form>
+    {% else %}
+        <div class="container">
+            <div class="row" style="background-color:#212121">
+                <div class="col-md-6 mt-3">
+                    <div>
+                        <img alt="Web Studio" class="img-fluid" src="/images/{{acteur.image}}" />
+                        <h4 class="mt-5" style="color: white;"> biographie</h4>
+                            <p class="mt-3" style="color: #BDBDBD; font-size: 20px;">
+                            {{acteur.biographie}}
+                            </p>
+                    </div>
+                    
+                </div>
+                <div class="col-md-6  mt-4 ">
+                    <div>
+                        <h4 style="color:  white; font-weight: bold; " >Nom de naissance: {{acteur.nom}} - {{acteur.prenom}}</h4><br>
+                        <h4  style="color:  white;" >date de naissance :{{acteur.date_naissance |date("d/m/Y")}}</h4><br>
+                        <h4  style="color: white;"> Nationalité : {{acteur.nationalite}}</h4>
+                        <h4  style="color: white;"> Nombre de films :{{acteur.films|length}}</h4>
+                        <div class="text-light"style="background-color:#100511">  Récompenses:
+                            {% if acteur.oscar %}
+                                <img src="/images/oscar.png "width="50px">
+                            {% endif %}
+                                {% if acteur.cesar %}
+                                <img src="/images/cesar.png "width="50px">
+                            {% endif %}
+                            {% if acteur.golden %}
+                                <img src="/images/cesar.png"width="50px">
+                            {% endif %}
+                        </div>
+                            <br>
+                        <h2 style="color: white;"> films </h2>
+                        <div class="row mb-4">
+                            {% for film in acteur.films %}
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <img src="/images/{{film.image}} "width="100px">
+                                        </div>
+                                        <div class="col-6">
+                                            <div> Titre : <a href="/films/{{film._id}}">{{film.titre}}</a></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
+                    </div><br>
+                </div>
+            </div>
+        </div>
+    {% endif %}   
+
+{% endblock %}
+  <script src="javascript/main.js"></script>

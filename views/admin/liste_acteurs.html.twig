@@ -1,0 +1,81 @@
+{% extends "base.html.twig" %} 
+{% block titre %} acteur liste {% endblock %}
+{% block contenue %}
+
+           <table class="table text-center monTableau " id="tableauLivres">
+               <thead>
+               <tr class="table-active text-light ml-4 ">
+                   <th>Prenom</th>
+                   <th>Nom</th>
+                   <th>Nombre de films</th>
+                   <th colspan="2">Actions</th>
+               </tr>  
+            </thead>
+            <tbody>
+            {% for acteur in listeActeur %}
+                <tr class="text-light"> 
+                    <td class="align-middle"><a href="/acteurs/{{acteur.id}}"> {{acteur.prenom}}</a></td>
+                    <td class="align-middle">{{acteur.nom}}</td>
+                    <td class="align-middle">{{acteur.films|length}}</td>
+                    <td><a href="/admin_acteur/modification/{{acteur._id}}" class="btn btn-warning">Modifier</a></td>
+                    <td>
+                        <form method="POST" action="/admin_acteur/delete/{{acteur._id}}" onSubmit="return confirm('Voulez-vous supprimer l\'acteur ')">
+                        <button class="btn btn-danger"type="submit">Supprimer</button>
+                        </form>
+                    </td>
+                </tr> 
+
+            {% endfor %}
+            </tbody>           
+           </table>
+           <button onclick="afficherFormulaire()" class="btn btn-success w-100">Ajouter</button>
+             <form id="ajoutForm" class="d-none " method ="POST" action="/admin_acteur" enctype="multipart/form-data">
+                <fieldset>
+                    <legend class="text-light">Création d'un acteur</legend>
+                    <div class="col-5 mt-3 mb-3 text-light" style="margin-left:200px">
+                        <label for="titre">Prénom</label>
+                        <input type="text" class="form-control" id="prenom" name="prenom">
+                    </div>
+                   <div class="col-5 mt-3 mb-3 text-light" style="margin-left:200px">
+                        <label for="titre">Nom</label>
+                        <input type="text" class="form-control" id="nom" name="nom">
+                    </div>
+                    <div class="col-5 mt-3 mb-3 text-light" style="margin-left:200px">
+                        <label for="date_naissance">date_naissance</label>
+                        <input type="date" class="form-control" id="date_naissance" name="date_naissance">
+                    </div>
+                     <div class="col-5 mt-3 mb-3 text-light" style="margin-left:200px">
+                        <label for="nationalite">nationalite</label>
+                        <input type="texte" class="form-control" id="nationalite" name="nationalite">
+                    </div>
+                   <div class="form-check col-5 mt-3 mb-3 text-light" style="margin-left:200px">
+                        <input class="form-check-input" type="checkbox" id="cesar"name="cesar">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            cesar
+                        </label>
+                    </div>
+                    <div class="form-check col-5 mt-3 mb-3 text-light" style="margin-left:200px">
+                        <input class="form-check-input" type="checkbox" id="oscar"name="oscar">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            oscar
+                        </label>
+                    </div>
+                    <div class="form-check col-5 mt-3 mb-3 text-light" style="margin-left:200px">
+                        <input class="form-check-input" type="checkbox" id="golden"name="golden">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            golden_globes
+                        </label>
+                    </div>
+                    <div class="col-5 mt-3 mb-3 text-light" style="margin-left:200px">
+                        <label for="biographie">biographie</label>
+                         <textarea class="form-control" id="biographie" name="biographie"  rows="5" cols="33"></textarea>
+                    </div>
+                    <div class="col-5  mb-3 text-light" style="margin-left:200px">
+                        <label for="image">Image</label>
+                        <input type="file" class="form-control-file" id="image" name="image" multiple>
+                    </div>
+                    <button class="btn btn-primary" type="submit"style="margin-left:200px">Valider</button>
+                </fieldset>
+            </form>
+            <script src="/javascript/ajoutfilm.js"></script>
+{% endblock %}

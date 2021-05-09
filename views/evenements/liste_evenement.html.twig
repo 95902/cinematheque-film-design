@@ -1,0 +1,96 @@
+{% extends "base.html.twig" %} 
+{% block titre %} Liste des evenements {% endblock %}
+
+  {% block contenue %}
+
+
+
+   <div class="container" style="width:1800px;padding:5px; height:1000px">
+        <div class="container" style=" height: 900px; width:1000px; float:left; ">
+            {% if noMatch != null  %}
+                <h3 class="text-light">{{ noMatch }}</h3>
+             {% endif %}
+            <div class="row row-cols-1 row-cols-md-4" id="pagination">
+                {% for evenement in liste %}
+                <div class="col mb-4">
+                    <div class="card" style="background-color:#170B22;">
+                            <a href="/evenement/{{evenement._id}}">
+                        <img src="/images/{{evenement.image}}"class="card-img-top">{{evenement.titre}}
+                            </a>
+                    </div>
+                </div>
+                {% endfor %}    
+            </div>
+             <center><div class="pagination" style="display: inline-block;">
+                <button type="button" class="btn btn-warning" onclick="precedent();">Retour</button>
+                <button type="button" class="btn btn-warning" onclick="suivant();">Suivant</button>
+                            
+            </div></center><br>
+
+        </div>
+
+          
+    </div>
+       
+     <script>
+        var start =0;
+        var limit = 8;
+        function suivant(){
+            start = start+limit;
+            $.ajax({
+                url : "/evenements/"+start+"/"+limit,
+                method:"GET",
+                success: function(
+                    reponse
+                ){
+                    console.log(reponse);
+                    affichage_evenements(reponse);
+                }
+            });
+        }
+
+        function precedent(){
+            start = start-limit;
+            $.ajax({
+                url : "/evenements/"+start+"/"+limit,
+                method:"GET",
+                success: function(
+                    reponse
+                ){
+                    console.log(reponse);
+                    affichage_evenements(reponse);
+                }
+            });
+        }
+
+
+        function affichage_evenements(evenements){
+            
+            if(evenements.length> 0){
+                 
+                var html = "";
+                for(var a= 0; a < evenements.length; a++ ){
+
+                    html+='<div class="row row-cols-8 row-cols-md-4" id="pagination">';
+                            html+='<div class="col mb-4" style="width:100%">';
+                                html+='<div class="card" style="background-color:#170B22;">';
+                                        html+='<a href="/evenements/'+evenements[a]._id+'">';
+                                   html+=' <img src="/images/'+evenements[a].image+'"class="card-img-top">"'+evenements[a].titre+'"';
+                                        html+='</a>';
+                               html+=' </div>';
+                           html+=' </div>';
+                    html+='</div>';
+                    console.log(evenements[a].images);
+                
+                    
+
+                }
+                $('#pagination').html(html);
+            }
+            console.log('bonjour');
+        }
+     </script>
+
+{% endblock %}
+
+

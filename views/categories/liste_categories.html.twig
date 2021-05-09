@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %} 
+{% block titre %} Categorie liste {% endblock %}
+{% block contenue %}
+
+           <table class="table text-center monTableau " id="tableauLivres">
+               <thead>
+               <tr class="table-active text-light ml-4 ">
+                   <th>libelle</th>
+                   <th colspan="2">Actions</th>
+               </tr>  
+            </thead>
+            <tbody>
+            {% for categorie in listeCategorie %}
+                <tr class="text-light"> 
+                    <td class="align-middle"><a href="/categories/{{categorie.id}}"> {{categorie.libelle}}</a></td>
+                    <td class="align-middle">{{categorie.films|length}}</td>
+                </tr> 
+            {% endfor %}
+            </tbody>           
+           </table>
+{% endblock %}

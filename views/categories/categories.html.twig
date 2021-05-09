@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %} 
+{% block titre %}  {{categorie.libelle}} EN STREAMING<br> {% endblock %}
+
+  {% block contenue %}
+
+
+
+<div class="container" style="width:1800px;padding:5px; height:1000px">
+        <div class="container" style=" height: 900px; width:1000px; float:left; ">
+            
+            <div class="row row-cols-1 row-cols-md-4">
+                    {% for film in categorie.films %}
+                    <div class="col mb-4">
+                        <div class="card" style="background-color:#170B22;">
+                                <a href="/films/{{film._id}}">
+                            <img src="/images/{{film.image}}"class="card-img-top">{{film.titre}}
+                                </a>
+                        </div>
+                    </div>
+                    {% endfor %}    
+                </div>
+                
+            
+            </div>
+
+            <div style=" background-color: black;margin-left:1060px;width:250px;height: 500px">
+                <div><center><h2 style="color:white; background-color: #FF0068;">Genre</h2></center></div><br>
+               {% for categorie in listecategories %}
+                <a style="color:#FF0068" href="/categories/{{categorie.id}}"> {{categorie.libelle}}</a><br>
+                {% endfor %}
+                <div><center><h2 style="color:white; background-color: #FF0068;">Années</h2></center></div><br>
+                {% for annees in listeannee %}
+                    <a style="color:#FF0068" href="/annees/{{annees.id}}"> {{annees.annee}}</a><br>
+                {% endfor %}  
+                
+            </div>
+
+      
+    </div>
+
+
+{% endblock %}

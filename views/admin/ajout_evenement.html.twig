@@ -1,0 +1,114 @@
+{% extends "base.html.twig" %} 
+{% block titre %} Ajout evenements {% endblock %}
+{% block contenue %}
+
+{% if message|length >0 %}
+    <div class="alert alert-{{message.type}}" role="alert">
+        {{message.contenu}}
+    </div>
+{% endif %} 
+
+           <table class="table text-center monTableau " id="tableauLivres">
+               <thead>
+               <tr class="table-active text-light ml-4 ">
+                   <th>Image</th>
+                   <th>Titre</th>
+                   <th>Descritption</th>
+                   <th>dateDeb</th>
+                   <th>dateFin</th>
+                   <th>lieu</th>
+                   <th colspan="2">Actions</th>
+               </tr>  
+            </thead>
+            <tbody>
+            {% for evenement in liste %}
+                <tr class="text-light"> 
+                    <td class="align-middle"><img src="images/{{evenement.image}}"width="100px"</td>
+                    <td class="align-middle"><a href="/admin_evenement/{{evenement._id}}">{{evenement.titre}}</td>
+                    <td class="align-middle">{{ (evenement.description|length > 30 ? evenement.description|slice(0, 30) ~ '…' : evenement.description) }}</td>
+                    <td class="align-middle">{{evenement.lieu}}</td>
+                    <td class="align-middle">{{evenement.dateDeb}}</td>
+                    <td class="align-middle">{{evenement.dateFin}}</td>
+                    <td><a href="/admin_evenement/modification/{{evenement.id}}" class="btn btn-warning">Modifier</a></td>
+                    <td>
+                        <form method="POST" action="/admin_evenement/delete/{{evenement.id}}" onSubmit="return confirm('Voulez-vous supprimer l'evenenemt ')">
+                        <button class="btn btn-danger"type="submit">Supprimer</button>
+                        </form>
+                    </td>
+                </tr> 
+
+            {% endfor %}
+            </tbody>           
+           </table>
+           <button onclick="afficherFormulaire()" class="btn btn-success w-100">Ajouter</button>
+           
+       <form action="" class="d-none" id="ajoutForm" method ="POST" enctype="multipart/form-data">
+            <fieldset class="text-light ">
+                <legend class="mt-5" style="margin-left:200px">Création d'un evenement</legend>
+                <div class="col-5 mt-3 mb-3" style="margin-left:200px">
+                    <label for="titre" class="form-label text-light">Titre evenement</label>
+                    <input type="text" class="form-control " id="titre"  name="titre" >
+                </div>
+                <div class="col-5  mb-3" style="margin-left:200px">
+                    <label for="description" class="form-label text-light">Description</label>
+                    <textarea type="text" class="form-control" id="description" name="description" rows="3"> </textarea>
+                </div>
+                   <div class="col-5 mt-3 mb-3" style="margin-left:200px">
+                        <label for="dateDeb" class="form-label text-light">Date_debut</label>
+                        <input type="date" class="form-control " id="=dateDeb"  name="dateDeb">
+                  </div>
+                     <div class="col-5 mt-3 mb-3" style="margin-left:200px">
+                        <label for="dateFin" class="form-label text-light">Date_fin</label>
+                        <input type="date" class="form-control " id="dateFin"  name="dateFin">
+                  </div>
+                     <div class="col-5 mt-3 mb-3" style="margin-left:200px">
+                        <label for="lieu" class="form-label text-light">lieu</label>
+                        <input type="text" class="form-control " id="lieu"  name="lieu">
+                  </div>
+
+                  <div class="col-1  mb-3" style="margin-left:200px">
+                    <label for="input_poste" class="form-label text-light">Ajouter Acteur <br>
+                    </label> <input class="multisteps-form__input form-control" id="nbcolis" name="nbcolis" value="0" onkeyup="set_colis(this.value)" />
+                </div>
+                <div class="col-4  mb-3"  id="colis_div"></div>
+        
+                <div class="col-5  mb-3" style="margin-left:200px">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control-file" id="image" name="image" multiple>
+                </div>
+
+                <div class="col-5  mb-3" style="margin-left:200px">
+                    <button  class="btn btn-primary" type="submit">Valider</button>
+                </div>
+            </fieldset>
+       </form>
+    
+    
+
+<script src="/javascript/ajoutEvenement.js"></script>
+
+<script>
+function set_colis(nb_colis) {
+    $('#colis_div').html('<dl class="table-display"><dt class="empty"></dt><dd></dd></dl>')
+      var colis_html = "";
+      for (var i = 0; i < nb_colis; i++) {
+    
+        colis_html += '<div class="col-5  mb-3" style="margin-left:200px">';
+        colis_html += ' <label for="Acteur" class="form-label text-light">Acteur</label>';
+        colis_html += ' <select class="form-control" id="acteur" name="acteur">';
+        colis_html += ' {% for acteur in listeActeur %}';
+        colis_html += '<option value="{{acteur._id}}">{{acteur.prenom}} - {{acteur.nom}}</option>';
+        colis_html += '<label for="input_poste" class="mb-3">Longueur(cm)*</label>';
+        colis_html += '{% endfor %}';
+        colis_html += '  </select>';
+        colis_html += '</div>';
+    
+    }
+    $('#colis_div').append(colis_html);
+    
+}
+</script>
+ 
+
+{% endblock %}
+ 

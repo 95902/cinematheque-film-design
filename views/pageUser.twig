@@ -1,0 +1,80 @@
+{% extends "base.html.twig" %} 
+{% block titre %} 
+<div style="background-color: #212121;width:1000px" class="row mt-5">
+    <div class="col-11">
+    Bonjour {{user.username}}
+    </div>
+    <div class="col-1">
+    <i style="opacity: 0.8;" class="fas fa-video"></i>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+    {% block contenue %}
+      <div class="container" style="width:1800px;padding:5px; height:1000px">
+        <div class="container" style="width:1000px; float:left;">
+          <nav>
+            <div class="nav nav-tabs " id="nav-tab" role="tablist">
+              <button class="nav-link active text-info "  style"color:#ff6e40"id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="true">Profile</button>
+              <button class="nav-link text-info" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-films" aria-selected="false">Films</button>
+            </div>
+          </nav>
+          <div class="tab-content text-white" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <form method="post" action="/users/save-profile" accept-charset="UTF-8" class="row ">
+                  <input type="hidden" name="userId" value="{{user._id}}">
+                <div class="col-md-4">
+                  <label for="username" class="form-label" style"color:#ff6e40">Nom utilisateur</label>
+                  <input type="text" id="username"  name="username" class="form-control"  value="{{user.username}}">
+                </div>
+                <div class="col-md-4">
+                  <label for="firstname" class="form-label">Nom</label>
+                  <input type="text" name="firstname"  id="firstname" class="form-control" value="{{ user.firstname}}">
+                </div>
+                <div class="col-9">
+                  <label for="lastname" class="form-label">Prénom</label>
+                  <input type="text" name="lastname" id="lastname" class="form-control"value="{{ user.lastname}}">
+                </div>
+              
+                <div class="col-md-4">
+                  <label for="email" class="form-label">email</label>
+                  <input type="email" name="email" id="email" class="form-control"value="{{ user.email}}">
+                </div>
+                <div class="col-12">
+                  <button type="submit" class=" btn btn-success mt-3">Mise à jour </button>
+                </div>
+              </form>
+                <form method="POST" action="/users/updateImage" enctype="multipart/form-data">
+                  <input type="hidden" name="identifiant" value="{{user._id}}">
+                  <h2 style="margin-left:100px">Images : </h2>
+                  <div class="row"style="margin-left:100px">
+                      <img src="/images/{{user.image}}" class="col-3">
+                      <div class="col-9">
+                          <div class="form-group">
+                              <label for="image">Image</label> <br>
+                              <input type="file" class="form-control-file" id="image" name="image">
+                          </div>
+                          <input type="submit" class="btn btn-primary" value="Modifier l'image">
+                      </div>
+                  </div>
+                </form>
+                <div class="mdp">
+                  <center><a href="/users/forgot-password"  style="color: white; ">Rénitialisation de votre mot de passe </a> </center>
+                </div>   
+              </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+            <h3> mes films</h3>
+            
+            </div>
+          </div>
+        </div>     
+    </div>
+{% endblock %}
+  
+
+   
+
+

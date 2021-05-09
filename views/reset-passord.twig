@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %} 
+{% block titre %} 
+<div style="background-color: #212121;width:1000px" class="row mt-5">
+    <div class="col-11">
+    Rénitialisation du mot de passe
+    </div>
+    <div class="col-1">
+    <i style="opacity: 0.8;" class="fas fa-video"></i>
+    </div>
+</div>
+
+{% endblock %}
+
+  {% block contenue %}
+
+
+
+   <div class="container" style="width:1800px;padding:5px; height:1000px">
+        <div class="container" style="width:1000px; float:left; background-color: #212121">
+          <form action="" method="POST">
+                  {% if errorForm %}
+          <ul class="text-light">
+          {% for error in errorForm %}   
+
+            {% if error.password  %}
+               <li class="text-danger">le mot de passe n'est pas valide</li>
+            {% endif %}
+
+            {% if error.passwordConfirm %}
+               <li class="text-danger">le mot de passe n'est pas identique</li>
+            {% endif %}
+
+
+          </ul>
+          {% endfor %}
+        {% endif %}
+             <div class="col-md-4 text-white">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" name="password" placeholder="password" id="password" class="form-control">
+            </div>
+            <div class="col-md-4 text-white">
+                <label for="passwordConfirm" class="form-label">Répéter votre mot de passe </label>
+                <input type="password" name="passwordConfirm" placeholder="passwordConfirm" id="passwordConfirm" class="form-control">
+            </div>
+            <div class="">
+                    <center> <button type="submit" class="btn btn-success mt-3">Rénitialiser</button></center> 
+            </div><br>
+   
+        </form> 
+           
+        </div>     
+    </div>
+{% endblock %}
