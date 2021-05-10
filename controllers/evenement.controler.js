@@ -1,22 +1,40 @@
 const mongoose = require("mongoose");
 const evenementModel = require("../models/evenement.model");
 const acteurModel = require("../models/acteur.modele");
-
+const categorieModel = require("../models/categories.modele");
+const anneeModel = require("../models/annee.model");
 
 
 
 exports.liste_evenement_affichage = async (requete,reponse)=>{ 
-   
-        evenementModel.find()
+    anneeModel.find()
+    .exec()
+    .then(annee=>{
+        categorieModel.find()
+        .populate("films")
         .exec()
-        .then(evenements=>{
-            reponse.render("evenements/liste_evenement.html.twig",{
-                    liste : evenements
-                    })
+        .then(categorie=>{
+            evenementModel.find()
+            .exec()
+            .then(evenements=>{
+                reponse.render("evenements/liste_evenement.html.twig",{
+                        liste : evenements,
+                        listecategorie:categorie,
+                        listeannee:annee
                 })
-                .catch( error =>{
-                    console.log(error)
-                });
+            })
+            .catch( error =>{
+                console.log(error)
+            });
+        })
+        .catch( error =>{
+            console.log(error)
+        });
+    })
+    .catch( error =>{
+        console.log(error)
+    });
+            
 }
 
 
