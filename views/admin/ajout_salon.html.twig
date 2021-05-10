@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %} 
+{% block titre %} Ajout Salon {% endblock %}
+{% block contenue %}
+
+{% if message|length >0 %}
+    <div class="alert alert-{{message.type}}" role="alert">
+        {{message.contenu}}
+    </div>
+{% endif %} 
+           <table class="table text-center monTableau " id="tableauLivres">
+               <thead>
+               <tr class="table-active text-light ml-4 ">
+                   <th>Image</th>
+                   <th>nom</th>
+                   <th>description</th>
+                   <th colspan="2">Actions</th>
+               </tr>  
+            </thead>
+            <tbody>
+            {% for salon in liste %}
+                <tr class="text-light"> 
+                    <td class="align-middle"><img src="images/{{salon.image}}"width="100px"</td>
+                    <td class="align-middle"><a href="/admin_salon/{{salon._id}}">{{salon.nom}}</td>
+                    <td class="align-middle">{{ (salon.description|length > 30 ? salon.description|slice(0, 30) ~ '…' : salon.description) }}</td>
+                    <td><a href="/admin_salon/modification/{{salon.id}}" class="btn btn-warning">Modifier</a></td>
+                    <td>
+                        <form method="POST" action="/admin_salon/delete/{{salon.id}}" onSubmit="return confirm('Voulez-vous supprimer le livre ')">
+                        <button class="btn btn-danger"type="submit">Supprimer</button>
+                        </form>
+                    </td>
+                </tr> 
+
+            {% endfor %}
+            </tbody>           
+           </table>
+           <button onclick="afficherFormulaire()" class="btn btn-success w-100">Ajouter</button>
+           
+       <form action="" class="d-none" id="ajoutForm" method ="POST" enctype="multipart/form-data">
+            <fieldset class="text-light ">
+                <legend class="mt-5" style="margin-left:200px">Création d'un salon</legend>
+                <div class="col-5 mt-3 mb-3" style="margin-left:200px">
+                    <label for="titre" class="form-label text-light">Titre salon</label>
+                    <input type="text" class="form-control " id="nom"  name="nom" >
+                </div>
+                <div class="col-5  mb-3" style="margin-left:200px">
+                    <label for="Synopsys" class="form-label text-light">description</label>
+                    <textarea type="text" class="form-control" id="description" name="description" rows="3"> </textarea>
+                </div>   
+                <div class="col-5  mb-3" style="margin-left:200px">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control-file" id="image" name="image" multiple>
+                </div>
+                <div class="col-5  mb-3" style="margin-left:200px">
+                    <button  class="btn btn-primary" type="submit">Valider</button>
+                </div>
+            </fieldset>
+       </form>
+  
+ <script src="/javascript/ajoutfilm.js"></script>
+
+{% endblock %}
+ 

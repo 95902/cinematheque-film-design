@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %} 
+{% block titre %}{{film.nom}} {% endblock %}
+{% block contenue %}
+        <form method="POST" action="/admin_salon/modificationServer">
+            <div class="row m-2">
+                <div class="col-6">
+                    <h2>Informations : </h2>
+                    <div class="mt-3 mb-3" style="margin-left:100px">
+                        <label for="titre" class="form-label text-light">Nom salon</label>
+                        <input type="text" class="form-control " id="nom"  name="nom" value="{{salon.nom}}" >
+                    </div>                      
+                </div> 
+                <div class=" col-6 mb-3" style="margin-left:100px">
+                    <label for="Bdannonce" class="form-label text-light">description</label>
+                    <input type="text" class="form-control " id="description"  name="description" value="{{salon.description}}" >
+                </div>  
+            </div>
+            <input type="hidden" name="identifiant" value="{{salon._id}}">
+            <input type="submit" class="btn btn-primary w-100" style="margin-left:100px" value="Valider">
+        </form>
+             <form method="POST" action="/admin_salon/updateImage" enctype="multipart/form-data">
+            <input type="hidden" name="identifiant" value="{{salon._id}}">
+            <h2 style="margin-left:100px">Images : </h2>
+            <div class="row"style="margin-left:100px">
+                <img src="/images/{{salon.image}}" class="col-3">
+                <div class="col-9">
+                    <div class="form-group">
+                        <label for="image">Image</label> <br>
+                        <input type="file" class="form-control-file" id="image" name="image">
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Modifier l'image">
+                </div>
+            </div>
+        </form>
+ 
+
+
+{% endblock %}
+  <script src="javascript/main.js"></script>
