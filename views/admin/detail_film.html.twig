@@ -64,6 +64,18 @@
                         <textarea class="form-control" id="synopsys" name="synopsys" rows="3">{{film.synopsys}}</textarea>
                     </div>
                 </div>
+                <div class="col-5 mt-3 mb-3" style="margin-left:200px">
+                    <label for="duree" class="form-label text-light">Duree</label>
+                    <input type="number" class="form-control " id="duree"  name="duree"value="{{film.duree}}" >
+                </div>
+                <div class="col-5 mt-3 mb-3" style="margin-left:200px">
+                    <label for="Realisateur" class="form-label text-light">Réalisateur</label>
+                    <input type="text" class="form-control " id="Realisateur"  name="Realisateur"value="{{film.Realisateur}}" >
+                </div>
+                <div class="col-5 mt-3 mb-3" style="margin-left:200px">
+                    <label for="Pays" class="form-label text-light">Pays</label>
+                    <input type="text" class="form-control " id="Pays"  name="Pays"value="{{film.Pays}}" >
+                </div>
             </div>
             <input type="hidden" name="identifiant" value="{{film._id}}">
             <input type="submit" class="btn btn-primary w-100" style="margin-left:100px" value="Valider">
@@ -83,37 +95,131 @@
             </div>
         </form>
     {% else %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div>
-                    <img alt="Web Studio" class="img-fluid" src="/images/{{film.image}}" />
-                </div>
+<div class="container">
+    <div class="row" style="background-color:#212121">
+        <div class="col-md-5 mt-3">
+            <div>
+                <img alt="Web Studio" class="img-fluid" src="/images/{{film.image}}" />
             </div>
-                <div class="col-md-6 col-lg-5 ml-auto d-flex align-items-center mt-4 mt-md-0">
-                    <div>
-                        <h2 style="color:  #ff0062; font-weight: bold; " >{{film.titre}}</h2><br>
-                        <h3  style="color:  #ff0062;" > {{film.categorie.libelle}}  </h3><br>
-                        <h3  style="color:  #ff0062;" > <a href="/acteurs/{{film.acteur._id}}">Acteur : {{film.acteur.nom}} - {{film.acteur.prenom}} </a></h3><br>
-                        <h4  style="color: #ff0062;"> Synopsy </h4>
-                        <p class="margin-top-s" style="color: #BDBDBD; font-size: 20px;">
-                        {{film.synopsys}}
-                        </p> <br>
-                        <center> <button type="submit" class="button1">Regarder</button></center> 
-
-                    </div><br>
+        </div>
+        <div class="col-md-7  mt-5">
+            <div class="acteur_style">
+                <h2 style="color:  white; font-weight: bold; " >{{film.titre}}</h2><br>
+                <h4 class="mb-2" style="color: white;"> Synopsy </h4>
+                <p class="margin-top-s" style="color: #BDBDBD; font-size: 20px;">
+                {{film.synopsys}}
+                </p> <br>
+                 <h5  style="color:white;" > Categories:&ensp;{{film.categorie.libelle}} </h5><br>
+                <h5  style="color:white;text-decoration:none;" > Acteur : <a  href="/acteurs/{{film.acteur[0]._id}}"> {{film.acteur[0].nom}} - {{film.acteur[0].prenom}} </a> &emsp;
+                <a  href="/acteurs/{{film.acteur[1]._id}}"> {{film.acteur[1].nom}} - {{film.acteur[1].prenom}} </a>
+                </h5><br>
+                <h5  style="color:white;" > Durée:&ensp;{{film.duree}} </h5><br>
+                <h5  style="color:white;" > Pays:&ensp;{{film.Pays}} </h5><br>
+                <h5  style="color:white;" > Réalisateur:&ensp;{{film.Realisateur}} </h5><br>
+            </div><br>
+                    <div style="display: flex;">
+                       
+                <input type="number" name="rating" id="rating-input" min="1" max="5" style="display: none;" />
+            <div class="rating" role="optgroup">
+                <!-- in Rails just use 1.upto(5) -->
+                
+                <i class="fa fa-star-o fa-1x rating-star" id="rating-1" data-rating="1" tabindex="0"
+                    aria-label="Rate as one out of 5 stars" role="radio"
+                    onmousedown="verification_page_3(this.id)"></i>
+                <i class="fa fa-star-o fa-1x rating-star" id="rating-2" data-rating="2" tabindex="0"
+                    aria-label="Rate as two out of 5 stars" role="radio"
+                    onmousedown="verification_page_3(this.id)"></i>
+                <i class="fa fa-star-o fa-1x rating-star" id="rating-3" data-rating="3" tabindex="0" role="radio"
+                    onmousedown="verification_page_3(this.id)"></i>
+                <i class="fa fa-star-o fa-1x rating-star" id="rating-4" data-rating="4" tabindex="0"
+                    aria-label="Rate as four out of 5 stars" role="radio"
+                    onmousedown="verification_page_3(this.id)"></i>
+                <i class="fa fa-star-o fa-1x rating-star" id="rating-5" data-rating="5" tabindex="0"
+                    aria-label="Rate as five out of 5 stars" role="radio"
+                    onmousedown="verification_page_3(this.id)"></i>
+            </div>
+        </div>
+                <center><button type="button" class="mb-3 cBtnYouTube btn button1" data-bs-toggle="modal" data-bs-target="#oModalYouTube" data-url="{{film.Bdannonce}}" data-titre="{{film.titre}}">Regarder </button></center> 
+                <div class="modal fade" id="oModalYouTube" tabindex="-1" aria-labelledby="oModalYouTubeTitre" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content rounded-0">
+                            <div class="modal-header rounded-0 border-0" style="color:#fff;background-color:#000">
+                                <p id="oModalYouTubeTitre" class="modal-title lh-1"></p>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                            </div>
+                            <div class="modal-body p-0">
+                                <div class="ratio ratio-16x9">
+                                <iframe id="oVideoYouTubeiFrame" src="" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-             </div>
+            
         </div>
     </div>
-    <br><br> 
-    <div class="main1">
-        <h4 style="color:  #ff0062;" > Avis </h4>
-        <h5 style="color:  #ff0062;"> Commentaire    <img src="/images/bulle.png" width="30"></h5>
-        <textarea id="txtMessage"  placeholder="Laissez Votre Commentaire..." style="color: #ff0062; font-size: 15px; width: 25%; ; "></textarea>
+</div>
+<br><br> 
+<div class="main1">
+<div class="row d-flex justify-content-center  ">
+    <div class="col-9">
+         <section class="popular-places" id="popular">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-heading">
+                            <h2 class="mb-5 mt-2 text-light text-center" >Films similaires</h2>
+                        </div>
+                    </div> 
+                </div> 
+
+                <div class="owl-carousel owl-theme">
+                    {% for film in categorie.films %}
+                        <div class="item popular-item">
+                            <div class="thumb">
+                            <a href="/films/{{film._id}}">
+                                <img src="/images/{{film.image}}" alt="">
+                            </a>
+                            </div>
+                            <div class="text-white  text-content">
+                                <h4>{{film.titre}}</h4>
+                            </div>
+                        </div>
+                    {% endfor %}    
+                </div>
+            </div>
+        </section>
     </div>
+</div>
+</div>
+  
+
+
  {% endif %}   
 
-
+ <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var oModalYouTubeElement = document.getElementById('oModalYouTube')
+      oModalYouTubeElement.addEventListener('hide.bs.modal', function (event) {
+        document.getElementById('oModalYouTubeTitre').innerHTML = '';
+        document.getElementById('oVideoYouTubeiFrame').setAttribute('src', '');
+      })
+    });
+    
+    window.addEventListener("DOMContentLoaded", function(e) {
+     	x = document.getElementsByClassName("cBtnYouTube");
+     	var i;
+         for (i = 0; i < x.length; i++) {
+           x[i].addEventListener("click", 
+           function (event) {
+              event.preventDefault();
+              document.getElementById('oModalYouTubeTitre').innerHTML = '<i class="fab fa-youtube"></i> '+this.getAttribute('data-titre');
+              document.getElementById('oVideoYouTubeiFrame').setAttribute('src', this.getAttribute('data-url'));
+           }, 
+           false);
+         }
+     }, false);
+    </script>
+    <script src="javascript/main.js"></script>
 {% endblock %}
-  <script src="javascript/main.js"></script>
+  

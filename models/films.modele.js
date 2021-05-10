@@ -20,6 +20,9 @@ const filmSchema = mongoose.Schema({
         require:true
     },
     image:String,
+    duree:String,
+    Realisateur :String,
+    Pays:String,
     Bdannonce:String,
 })
 

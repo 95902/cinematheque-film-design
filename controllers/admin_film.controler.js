@@ -107,7 +107,10 @@ exports.admin_film_modification_bdd = (requete,reponse)=>{
         annee : requete.body.annee,
         categorie : requete.body.categorie,
         acteur:requete.body.acteur,
-        Bdannonce:requete.body.Bdannonce
+        Bdannonce:requete.body.Bdannonce,
+        duree:requete.body.duree,
+        Realisateur:requete.body.Realisateur,
+        Pays:requete.body.Pays
     }
     filmModel.updateOne({_id:requete.body.identifiant},filmUpdate)
     .exec()
@@ -161,6 +164,9 @@ exports.admin_film_ajout =(requete,reponse)=>{
         acteur : requete.body.acteur,
         categorie : requete.body.categorie,
         Bdannonce:requete.body.Bdannonce,
+        duree:requete.body.duree,
+        Realisateur:requete.body.Realisateur,
+        Pays:requete.body.Pays,
         image:requete.file.path.substring(14)
     });
     film.save()

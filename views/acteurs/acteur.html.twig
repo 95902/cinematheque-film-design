@@ -1,5 +1,5 @@
 {% extends "base.html.twig" %} 
-{% block titre %}Acteur {% endblock %}
+{% block titre %}{% endblock %}
 {% block contenue %}
     {% if isModification %}
         <form  method ="POST" action="/admin_acteur/modificationServer">
@@ -83,11 +83,10 @@
                 </div>
                 <div class="col-md-6  mt-4 ">
                     <div>
-                        <h4 style="color:  white; font-weight: bold; " >Nom de naissance: {{acteur.nom}} - {{acteur.prenom}}</h4><br>
-                        <h4  style="color:  white;" >date de naissance :{{acteur.date_naissance |date("d/m/Y")}}</h4><br>
-                        <h4  style="color: white;"> Nationalité : {{acteur.nationalite}}</h4>
-                        <h4  style="color: white;"> Nombre de films :{{acteur.films|length}}</h4>
-                        <div class="text-light"style="background-color:#100511">  Récompenses:
+                        <h4 style="color:  white; font-weight: bold;"><i style="color: #ff6e40;height:50px;"class="fas fa-grip-lines-vertical"></i>&ensp;{{acteur.nom}} - {{acteur.prenom}}</h4><br>
+                        <h5  style="color:  white;" >Date de naissance :&ensp;{{acteur.date_naissance |date("d/m/Y")}}&emsp;&emsp;&emsp; Nationalité :&ensp; {{acteur.nationalite}}</h5><br>
+                        <h5 class="mb-2" style="color: white;"> Nombre de films :&ensp;{{acteur.films|length}}</h5>
+                        <div class=" mt-2" style="color: #ff6e40;height">Récompenses:
                             {% if acteur.oscar %}
                                 <img src="/images/oscar.png "width="50px">
                             {% endif %}
@@ -95,20 +94,20 @@
                                 <img src="/images/cesar.png "width="50px">
                             {% endif %}
                             {% if acteur.golden %}
-                                <img src="/images/cesar.png"width="50px">
+                                <img src="/images/golden-globe.png"width="50px">
                             {% endif %}
                         </div>
                             <br>
                         <h2 style="color: white;"> films </h2>
                         <div class="row mb-4">
                             {% for film in acteur.films %}
-                                <div class="col-6">
+                                <div class="col-6 mb-2 text-start">
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <img src="/images/{{film.image}} "width="100px">
                                         </div>
-                                        <div class="col-6">
-                                            <div> Titre : <a href="/films/{{film._id}}">{{film.titre}}</a></div>
+                                        <div class="col-6 filtre row">
+                                            <div><a href="/films/{{film._id}}">{{film.titre}}</a></div>
 
                                         </div>
                                     </div>
