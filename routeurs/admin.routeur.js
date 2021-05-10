@@ -88,4 +88,6 @@ routeur.post("/admin_acteur/delete/:id",admin_acteur_controler.admin_acteur_dele
 routeur.post("/admin_acteur",upload.single("image"),admin_acteur_controler.acteur_ajout);
 
 
+
+
 module.exports = routeur;

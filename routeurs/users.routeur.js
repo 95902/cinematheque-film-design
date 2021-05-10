@@ -97,9 +97,18 @@ router.post('/save-profile',usersControler.saveProfile);
 router.post('/updateImage',upload.single("image"),usersControler.update_image);
 
 router.post('/', usersControler.login);
+///////////////////////
+/////USER_Admin//////////
+///////////////////////
+router.get("/admin_user",usersControler.liste_user_affichage);
+
+//admi delete user bdd
+router.post("/admin_user/delete/:id",usersControler.admin_user_delet);
 
 
+router.get('/pageUser_modification/:id',usersControler.page_user_modif)
 
+router.post('/pageUser_modification/modificationServer',usersControler.page_user_modif_bdd);
 
 
 

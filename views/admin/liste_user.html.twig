@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %} 
+{% block titre %}   Utilisateur liste {% endblock %}
+{% block contenue %}
+
+           <table class="table text-center monTableau " id="tableauLivres">
+               <thead>
+               <tr class="table-active text-light ml-4 ">
+                   <th>Prenom</th>
+                   <th>Nom</th>
+                   <th>Nom utilisateur</th>
+                   <th>Email</th>
+                   <th colspan="2">Actions</th>
+               </tr>  
+            </thead>
+            <tbody>
+            {% for user in listeUser %}
+                <tr class="text-light"> 
+                    <td class="align-middle"><a href="/users/{{user.id}}"> {{user.firstname}}</a></td>
+                    <td class="align-middle">{{user.lastname}}</td>
+                    <td class="align-middle">{{user.username}}</td>
+                    <td class="align-middle">{{user.email}}</td>
+                    <td><a href="/users/pageUser_modification/{{user._id}}" class="btn btn-warning">Modifier
+                      <input type="hidden" name="userId" value="{{user._id}}"></a></td>
+                    <td>
+
+                        <form method="POST" action="/users/admin_user/delete/{{user._id}}" onSubmit="return confirm('Voulez-vous supprimer l\'user ')">
+                        <button class="btn btn-danger"type="submit">Supprimer</button>
+                        </form>
+                    </td>
+                </tr> 
+
+            {% endfor %}
+            </tbody>           
+           </table>
+            <script src="/javascript/ajoutfilm.js"></script>
+{% endblock %}
