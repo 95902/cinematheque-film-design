@@ -540,3 +540,15 @@ p{
 .rating .selected:before {
   content: '\f005';
 }
+body::-webkit-scrollbar {
+  width: 0.4em;
+}
+ 
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: #ff6e40;
+  outline: 1px solid slategrey;
+}
