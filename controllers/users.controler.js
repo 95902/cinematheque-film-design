@@ -239,6 +239,83 @@ module.exports = {
                 console.log(error);
             })
         });
+    },
+    liste_user_affichage:(requete,reponse,next)=>{
+        User.find()
+        .exec()
+        .then(users=>{
+            reponse.render("admin/liste_user.html.twig",{ listeUser:users,});
+        })
+    .catch( error =>{
+        console.log(error)
+    });
+    },
+    admin_user_delet:(requete,reponse,next)=>{
+        var user = User.findById(requete.params.id)
+        .select("image")
+        .exec()
+        .then(user => {
+            fs.unlink("./public/images/"+user.image, error => {
+                console.log(error);
+            })
+            User.remove({_id:requete.params.id})
+            .exec()
+            .then(resultat => {
+                requete.session.message = {
+                    type : 'success',
+                    contenu : 'Suppression effectuée'
+                }
+                reponse.redirect("/users/admin_user");
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        })
+        .catch(error => {
+            console.log(error);
+        })    
+    },
+    page_user_modif:( req, res,)=>{
+        User.findById(req.params.id)
+        .exec()
+        .then(user=>{
+            res.render("admin/detail_users.html.twig",{
+                users:user,
+         })
+        })
+        .catch( error =>{
+            console.log(error)
+        });
+    },
+    page_user_modif_bdd:(requete,reponse)=>{
+        const userUpdate ={
+            firstname: requete.body.firstname,
+            lastname :requete.body.lastname,
+            username : requete.body.username,
+            email : requete.body.email,
+        }
+        User.updateOne({_id:requete.body.identifiant},userUpdate)
+        .exec()
+        .then(resultat => {
+            if(resultat.nModified < 1) throw new Error("Requete de modification échouée");
+            requete.session.message = {
+                type : 'success',
+                contenu : 'modification effectuée'
+            }
+            reponse.redirect("/users/admin_user");
+        }) 
+        .catch(error => {
+            console.log(error);
+            requete.session.message = {
+                type : 'danger',
+                contenu : error.message
+            }
+            reponse.redirect("/users/admin_user");
+        })
     }
+    
+    
+
+
 }
 

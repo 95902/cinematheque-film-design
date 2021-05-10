@@ -1,89 +1,38 @@
 
 {% extends "base.html.twig" %} 
+{% block titre %} 
+<div style="background-color: #212121;width:1000px" class="row mt-5">
+    <div class="col-11">
+  Salons
+    </div>
+    <div class="col-1">
+    <i style="opacity: 0.8;" class="fas fa-video"></i>
+    </div>
+</div>
 
+{% endblock %}
 {% block contenue %}
 
     <section class="featured-places">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="section-heading">
-                        <h2 class="text-white">Salon</h2>
-                    </div>
-                </div> 
-            </div> 
 
-            <div class="row">
+            {%  for liste in liste %}
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="featured-item">
                         <div class="bg-dark ">
-                            <h4>Limelight Lodge</h4>
+                            <img src="/images/{{liste.image}}"class="card-img-top"><p style="opacity: 0.8;"> {{film.titre}}</p>
 
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum incidunt, aperiam nostrum et. Voluptas vel labore numqua.</p>
-
-                            <p><span><strong><sup>$</sup>300.00</strong> - <strong><sup>$</sup>400.00</strong></span></p>
+                            <p><span><strong><sup>$</sup>{{liste.description}}</strong> - <strong><sup>$</sup>400.00</strong></span></p>
 
                             <div class="text-button">
-                                 <a href="/salon?username={{user.username}}&&room=Rex">View Moreyyyyyyyyyyyyyyyyyyy</a>
+                                 <a href="/salon?username={{user.username}}&&room={{liste.nom}}">Acceder</a>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="featured-item">
-                        <div class="bg-dark ">
-                            <h4>Limelight Lodge</h4>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum incidunt, aperiam nostrum et. Voluptas vel labore numqua.</p>
-
-                            <p><span><strong><sup>$</sup>300.00</strong> - <strong><sup>$</sup>400.00</strong></span></p>
-
-                            <div class="text-button">
-                                <a href="/salon?username={{user.username}}&&room=Rex">View Moreyyyyyyyyyyyyyyyyyyy</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="featured-item">
-                       
-
-                        <div class="bg-dark ">
-                            <h4>Limelight Lodge</h4>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum incidunt, aperiam nostrum et. Voluptas vel labore numqua.</p>
-
-                            <p><span><strong><sup>$</sup>300.00</strong> - <strong><sup>$</sup>400.00</strong></span></p>
-
-                            <div class="text-button">
-                                <a href="/salon?username={{user.username}}&&room=Rex">View Moreyyyyyyyyyyyyyyyyyyy</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="featured-item">
-
-                        <div class="bg-dark ">
-                            <h4>Limelight Lodge</h4>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum incidunt, aperiam nostrum et. Voluptas vel labore numqua.</p>
-
-                            <p><span><strong><sup>$</sup>300.00</strong> - <strong><sup>$</sup>400.00</strong></span></p>
-
-                            <div class="text-button">
-                                <a href="/salon?username={{user.username}}&&room=Rex">View Moreyyyyyyyyyyyyyyyyyyy</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-
+                
+            {% endfor %}
             </div>
         </div>
     </section>

@@ -5,7 +5,7 @@ const multer    =require("multer");
 const admin_film_controler = require("../controllers/admin_film.controler");
 const admin_acteur_controler=require("../controllers/admin_acteur.controler");
 const admin_evenement_controler = require("../controllers/admin_evenement.controler");
-
+const admin_salon_controler = require("../controllers/admin_salon.controler")
 
 
 
@@ -86,6 +86,16 @@ routeur.post('/admin_acteur/modificationServer',admin_acteur_controler.admin_act
 routeur.post("/admin_acteur/updateImage",upload.single("image"),admin_acteur_controler.admin_acteur_update_image);
 routeur.post("/admin_acteur/delete/:id",admin_acteur_controler.admin_acteur_delet);
 routeur.post("/admin_acteur",upload.single("image"),admin_acteur_controler.acteur_ajout);
+
+///////////////////////
+/////SALON//////////
+///////////////////////
+routeur.get("/admin_salon",admin_salon_controler.liste_salon_affichage);
+routeur.get("/admin_salon/modification/:id",admin_salon_controler.admin_salon_modification);
+routeur.post('/admin_salon/modificationServer',admin_salon_controler.admin_salon_modification_bdd);
+routeur.post("/admin_salon/updateImage",upload.single("image"),admin_salon_controler.admin_salon_update_image);
+routeur.post("/admin_salon/delete/:id",admin_salon_controler.admin_salon_delet);
+routeur.post("/admin_salon",upload.single("image"),admin_salon_controler.salon_ajout);
 
 
 module.exports = routeur;
