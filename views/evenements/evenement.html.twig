@@ -1,8 +1,8 @@
 {% extends "base.html.twig" %} 
-{% block titre %}{{evenement.titre}} {% endblock %}
+{% block titre %}{% endblock %}
 {% block contenue %}
 
-<div class="container">
+<div class="container mt-4">
     <div class="row">
         <div class="col-md-6">
             <div>
@@ -11,22 +11,18 @@
         </div>
         <div class="col-md-6 col-lg-5 ml-auto d-flex align-items-center mt-4 mt-md-0">
             <div>
-                <h2 style="color:  #ff0062; font-weight: bold; " >{{evenement.titre}}</h2><br>
-                <h3  style="color:  #ff0062;" > Acteur : <a href="/acteurs/{{evenement.acteur[0]._id}}"> {{evenement.acteur[0].nom}} - {{evenement.acteur[0].prenom}} </a> -
-                <a href="/acteurs/{{evenement.acteur[1]._id}}"> {{evenement.acteur[1].nom}} - {{evenement.acteur[1].prenom}} </a>
-                </h3><br>
-                <h4  style="color: #ff0062;">Description </h4>
+                <h2 style="color:  white; font-weight: bold; " >&emsp;&emsp;&emsp; {{evenement.titre}}</h2><br>
+                 <br>
+                 <h5 style="color: white;">Date :&emsp; {{evenement.dateDeb |date("d/m/Y")}} - {{evenement.dateFin |date("d/m/Y")}} </h5>
+                 <h5 class="mt-4" style="color: white;">Lieu :&emsp;{{evenement.lieu}} </h5>
+                 <h5 class="mt-4 " style="color:  white;text-decoration: none;" > Acteur : <a  style="text-decoration: none;" href="/acteurs/{{evenement.acteur[0]._id}}"> {{evenement.acteur[0].nom}} - {{evenement.acteur[0].prenom}} </a> -
+                <a  href="/acteurs/{{evenement.acteur[1]._id}}"> {{evenement.acteur[1].nom}} - {{evenement.acteur[1].prenom}} </a>
+                </h5><br>
+                <h4  style="color: white;">Description </h4>
                 <p class="margin-top-s" style="color: #BDBDBD; font-size: 20px;">
                 {{evenement.description}}
                 </p> <br>
-                <h4  style="color: #ff0062;">Lieu </h4>
-                <p class="margin-top-s" style="color: #BDBDBD; font-size: 20px;">
-                {{evenement.lieu}}
-                </p> <br>
-              <h4  style="color: #ff0062;">Date : </h4>
-                <p class="margin-top-s" style="color: #BDBDBD; font-size: 20px;">
-                {{evenement.dateDeb |date("d/m/Y")}} - {{evenement.dateFin |date("d/m/Y")}} 
-                </p> <br>
+               
                 
             </div><br>
         </div>

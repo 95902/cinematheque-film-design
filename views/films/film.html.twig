@@ -12,16 +12,41 @@
         <div class="col-md-7  mt-5">
             <div class="acteur_style">
                 <h2 style="color:  white; font-weight: bold; " >{{film.titre}}</h2><br>
-                <h4  style="color: white;"> Synopsy </h4>
+                <h4 class="mb-2" style="color: white;"> Synopsy </h4>
                 <p class="margin-top-s" style="color: #BDBDBD; font-size: 20px;">
                 {{film.synopsys}}
                 </p> <br>
-                 <h5  style="color:white;" > Categories:&ensp;{{film.categorie.libelle}} </h5><br>
+                 <h5  style="color:white;" > Categories:&ensp;{{film.categorie.libelle}}&emsp;&emsp;&emsp;&emsp;Durée:&ensp;{{film.duree}}</h5><br>
                 <h5  style="color:white;text-decoration:none;" > Acteur : <a  href="/acteurs/{{film.acteur[0]._id}}"> {{film.acteur[0].nom}} - {{film.acteur[0].prenom}} </a> &emsp;
                 <a  href="/acteurs/{{film.acteur[1]._id}}"> {{film.acteur[1].nom}} - {{film.acteur[1].prenom}} </a>
                 </h5><br>
+                <h5  style="color:white;" > Pays:&ensp;{{film.Pays}}&emsp;&emsp;&emsp;&emsp; Réalisateur:&ensp;{{film.Realisateur}}</h5><br>
             </div><br>
-                <center><button type="button" class="mb-3 cBtnYouTube btn button1" data-bs-toggle="modal" data-bs-target="#oModalYouTube" data-url="{{film.Bdannonce}}" data-titre="{{film.titre}}">Bande d'Annonce</button></center> 
+            
+            <div style="display: flex;">      
+                <input type="number" name="rating" id="rating-input" min="1" max="5" style="display: none;" />
+                 <h5 style="color:white">Note&emsp;&emsp;</h5><br>
+            <div class="rating" role="optgroup">
+                   
+                <!-- in Rails just use 1.upto(5) -->
+                
+                <i class="fa fa-star-o fa-1x rating-star" id="rating-1" data-rating="1" tabindex="0"
+                    aria-label="Rate as one out of 5 stars" role="radio"
+                    onmousedown="verification_page_3(this.id)"></i>
+                <i class="fa fa-star-o fa-1x rating-star" id="rating-2" data-rating="2" tabindex="0"
+                    aria-label="Rate as two out of 5 stars" role="radio"
+                    onmousedown="verification_page_3(this.id)"></i>
+                <i class="fa fa-star-o fa-1x rating-star" id="rating-3" data-rating="3" tabindex="0" role="radio"
+                    onmousedown="verification_page_3(this.id)"></i>
+                <i class="fa fa-star-o fa-1x rating-star" id="rating-4" data-rating="4" tabindex="0"
+                    aria-label="Rate as four out of 5 stars" role="radio"
+                    onmousedown="verification_page_3(this.id)"></i>
+                <i class="fa fa-star-o fa-1x rating-star" id="rating-5" data-rating="5" tabindex="0"
+                    aria-label="Rate as five out of 5 stars" role="radio"
+                    onmousedown="verification_page_3(this.id)"></i>
+            </div>
+        </div>
+                <center><button type="button" class="mb-3 cBtnYouTube btn button1" data-bs-toggle="modal" data-bs-target="#oModalYouTube" data-url="{{film.Bdannonce}}" data-titre="{{film.titre}}">Regarder </button></center> 
                 <div class="modal fade" id="oModalYouTube" tabindex="-1" aria-labelledby="oModalYouTubeTitre" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content rounded-0">
@@ -47,31 +72,6 @@
 <div class="main1">
 <div class="row d-flex justify-content-center  ">
     <div class="col-9">
-        {# <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-        {% for i in 0..2 %}
-       
-            <div class="carousel-item {%if loop.index == 1%} active {%endif%}">
-               
-                <div class="row p-5">
-                 
-                        {% for film in categorie.films %}
-                            
-                    <div class="card bg-dark ml-1 mr-1 " style="width: 14rem;">
-                        <img src="/images/{{film.image}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title text-light">{{film.titre}}</h5>
-                        </div>
-                    </div>
-
-                        {% endfor %}
-                
-                </div>
-                  
-            </div>
-            {% endfor %}
-           
-        </div> #}
          <section class="popular-places" id="popular">
             <div class="container">
                 <div class="row">
@@ -98,18 +98,6 @@
                 </div>
             </div>
         </section>
-
-
-
-        {# <button class="carousel-control-prev ml-5 " type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon ml-5" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next ml-5" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span class="carousel-control-next-icon ml-5" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-        </div> #}
     </div>
 </div>
 </div>
@@ -138,6 +126,7 @@
          }
      }, false);
     </script>
+    <script src="javascript/main.js"></script>
 {% endblock %}
-  <script src="javascript/main.js"></script>
+  
 

@@ -5,17 +5,17 @@
     Acteurs
     </div>
     <div class="col-1">
-    <i style="opacity: 0.8;" class="fas fa-video"></i>
+    <i style="opacity: 0.8;" class="fas fa-mask"></i>
     </div>
 </div>
-
-
+{% endblock %}
+{% block contenue %}
 <div class="container" style="width:1800px;padding:5px; height:1000px">
     <div class="container" style="width:1000px; float:left; background-color: #212121">
         {% if noMatch != null  %}
             <h3 class="text-light">{{ noMatch }}</h3>
             {% endif %}
-        <div class="row row-cols-1 row-cols-md-4" id="pagination">
+        <div class="row row-cols-1 row-cols-md-4 mt-4" id="pagination">
                 {%  for acteur in listeacteur %}
             <div class="col mb-4">
                 <div class="card" style="background-color:#212121;border:none">
@@ -28,10 +28,8 @@
         </div>
             <center><div class="pagination" style="display: inline-block;">
             <button type="button" style="background-color:#ff6e40;opacity: 0.9;color:white" class="btn " onclick="precedent();">Retour</button>
-            <button type="button" style="background-color:#ff6e40;opacity: 0.9;color:white" class="btn " onclick="suivant();">Suivant</button>
-                        
+            <button type="button" style="background-color:#ff6e40;opacity: 0.9;color:white" class="btn " onclick="suivant();">Suivant</button>               
         </div></center><br>
-
     </div>
 
     <div style=" background-color: #212121;margin-left:1060px;width:280px;height: 800px">

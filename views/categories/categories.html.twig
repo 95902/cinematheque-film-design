@@ -1,39 +1,59 @@
 {% extends "base.html.twig" %} 
-{% block titre %}  {{categorie.libelle}} EN STREAMING<br> {% endblock %}
+{% block titre %} 
+<div style="background-color: #212121;width:1000px" class="row mt-5">
+    <div class="col-11">
+  {{categorie.libelle}} EN STREAMING
+    </div>
+    <div class="col-1">
+    <i style="opacity: 0.8;" class="fas fa-video"></i>
+    </div>
+</div>
+{% endblock %}
 
-  {% block contenue %}
-
-
-
+{% block contenue %}
 <div class="container" style="width:1800px;padding:5px; height:1000px">
-        <div class="container" style=" height: 900px; width:1000px; float:left; ">
-            
-            <div class="row row-cols-1 row-cols-md-4">
-                    {% for film in categorie.films %}
-                    <div class="col mb-4">
-                        <div class="card" style="background-color:#170B22;">
-                                <a href="/films/{{film._id}}">
-                            <img src="/images/{{film.image}}"class="card-img-top">{{film.titre}}
-                                </a>
-                        </div>
+        <div class="container" style="width:1000px; float:left; background-color: #212121">
+            {% if noMatch != null  %}
+                <h3 class="text-light">{{ noMatch }}</h3>
+             {% endif %}
+            <div class="row row-cols-1 row-cols-md-4 mt-4" id="pagination">
+                {% for film in categorie.films %}
+                <div class="col mb-4">
+                    <div class="card" style="background-color:#212121;border:none">
+                            <a style=" text-decoration: none; " href="/films/{{film._id}}">
+                        <img src="/images/{{film.image}}"class="card-img-top"><p style="opacity: 0.8;"> {{film.titre}}</p>
+                            </a>
                     </div>
-                    {% endfor %}    
                 </div>
-                
-            
+                {% endfor %}    
             </div>
+             <center><div class="pagination" style="display: inline-block;">
+                <button type="button" style="background-color:#ff6e40;opacity: 0.9;color:white" class="btn " onclick="precedent();">Retour</button>
+                <button type="button" style="background-color:#ff6e40;opacity: 0.9;color:white" class="btn " onclick="suivant();">Suivant</button>
+                            
+            </div></center><br>
 
-            <div style=" background-color: black;margin-left:1060px;width:250px;height: 500px">
-                <div><center><h2 style="color:white; background-color: #FF0068;">Genre</h2></center></div><br>
-               {% for categorie in listecategories %}
-                <a style="color:#FF0068" href="/categories/{{categorie.id}}"> {{categorie.libelle}}</a><br>
-                {% endfor %}
-                <div><center><h2 style="color:white; background-color: #FF0068;">Années</h2></center></div><br>
-                {% for annees in listeannee %}
-                    <a style="color:#FF0068" href="/annees/{{annees.id}}"> {{annees.annee}}</a><br>
-                {% endfor %}  
-                
+        </div>
+           <div style=" background-color: #212121;margin-left:1060px;width:280px;height: 800px">
+            <div class=""><center><h6 style=" color:white; background-color: #100511;">  &emsp; &emsp;</div><br>
+            <div class=""><center><h6 style="color:white;"><i style="color: #ff6e40;height:50px;opacity: 0.8;"class="fas fa-grip-lines-vertical"></i></i>&ensp;FILM PAR CATÉGORIES  &emsp; <i class="fas fa-photo-video"></i></h6></center></div><br>
+            <div class="filtre row">
+            {% for categorie in listecategories %}
+                <div class="mt-2 col-6">
+                    <a style=" margin-left:20px;" href="/categories/{{categorie.id}}"> {{categorie.libelle}}</a>
+                </div>
+            {% endfor %} 
             </div>
+            <div class=""><center><h6 style=" color:white; background-color: #100511;">  &emsp; &emsp;</div><br>
+            <div class=""><center><h6 style="color:white; "><i style="color: #ff6e40;height:50px;"class="fas fa-grip-lines-vertical"></i>&ensp;FILMS PAR ANNÉE  &emsp; <i class="fas fa-photo-video"></i></h6></center></div><br>
+            <div class="filtre row">
+            {% for annees in listeannee %}
+                <div class="mt-2 col-4">
+                    <a style=" margin-left:20px;" href="/annees/{{annees.id}}"> {{annees.annee}}</a>
+                </div>
+            {% endfor %}   
+            </div>
+        </div>  
 
       
     </div>

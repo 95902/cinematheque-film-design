@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const acteurModel = require("../models/acteur.modele");
 const fs = require("fs");
+const categorieModel = require("../models/categories.modele");
+const anneeModel = require("../models/annee.model");
 
 exports.acteur_pagination = async(requete, reponse)=>{
     
@@ -17,18 +19,35 @@ exports.acteur_pagination = async(requete, reponse)=>{
 
 
 exports.liste_acteurs_affichage= (requete,reponse)=>{
-    var limit = 1;
-    acteurModel.find().limit(limit)
+    var limit = 8;
+    anneeModel.find()
+    .exec()
+    .then(annee=>{
+        categorieModel.find()
+        .populate("films")
         .exec()
-        .then(acteur=>{
-            console.log(acteur)
-            reponse.render("acteurs/liste_acteurs.html.twig",{
-                listeacteur:acteur,
-            })
+        .then(categorie=>{
+            acteurModel.find().limit(limit)
+                .exec()
+                .then(acteur=>{
+                    console.log(acteur)
+                    reponse.render("acteurs/liste_acteurs.html.twig",{
+                        listeacteur:acteur,
+                        listecategorie:categorie,
+                        listeannee:annee
+                    })
+                })
+            .catch( error =>{
+                console.log(error)
+            });
         })
         .catch( error =>{
             console.log(error)
-    });
+    })
+    })
+    .catch( error =>{
+        console.log(error)
+    })
 }
 
 exports.acteur_affichage= (requete,reponse)=>{
