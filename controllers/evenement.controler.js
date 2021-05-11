@@ -47,7 +47,7 @@ exports.evenement_details = (requete,reponse)=>{
             acteurModel.findById(evenement.acteur._id)
             .exec()
             .then(acteur=>{
-                console.log(evenement)
+             
                 
                 reponse.render("evenements/evenement.html.twig",{evenement:evenement,
                     acteur:acteur

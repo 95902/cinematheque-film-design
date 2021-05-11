@@ -1,0 +1,33 @@
+<button type"button" class"btn btn-dark text-light" onclick="doLike();" >
+        <i class="fa fa-thumbs-up"></i>
+        <span id="likes"> {{film.likers.length}} </span>
+</button>
+<button type"button" class"btn btn-info" onclick="doDisLike();" >
+        <i class="fa fa-thumbs-down"></i>
+        <span id="dislikes">{{film.dislikers.length}}</span>
+</button>
+<script type="text/Javascript">
+    function doLike(){
+        var ajax = new  XMLHttpRequest();
+        ajax.open("POST","/do-Like",true);
+        ajax.setRequestHeader("Content-Type","application/x-wwww-form-urlencoded");
+        
+        ajax.onreadystatechange =function(){
+            if(this.readyState == 4 & this.status == 200){
+                    var response = JSON.parse(this.responseText);
+                    if(response.status == "success"){
+                            //mise a jour like
+                            var likes = document.getElementById("likes").innerHTML;
+                            likes= parseInt(likes);
+                            likes++;
+                             document.getElementById("likes").innerHTML=likes;
+                    }else{
+                        alert(response.message)
+                    }
+            }
+        };
+
+        var film_id = document.getElementById("film_id").value;
+        ajax.send('film_id='+film_id)
+    }
+</script>

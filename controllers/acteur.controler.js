@@ -30,7 +30,7 @@ exports.liste_acteurs_affichage= (requete,reponse)=>{
             acteurModel.find().limit(limit)
                 .exec()
                 .then(acteur=>{
-                    console.log(acteur)
+                    // console.log(acteur)
                     reponse.render("acteurs/liste_acteurs.html.twig",{
                         listeacteur:acteur,
                         listecategorie:categorie,
@@ -55,7 +55,7 @@ exports.acteur_affichage= (requete,reponse)=>{
     .populate("films")
     .exec()
     .then(acteur=>{
-        console.log(acteur);
+        // console.log(acteur);
         reponse.render("acteurs/acteur.html.twig",{acteur:acteur,isModification:false})
     })
     .catch( error =>{

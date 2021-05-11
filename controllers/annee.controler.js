@@ -12,7 +12,7 @@ exports.annees_affichages=(requete,response)=>{
         anneeModel.find()
         .exec()
         .then(annees=>{
-        console.log(annee);
+       
             categorieModel.find()
             .exec()
             .then(categories=>{

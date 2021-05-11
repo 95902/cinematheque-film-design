@@ -67,7 +67,7 @@
     </div>
 </div>
 <br><br> 
-
+<input type="hidden" id="film_id" value="{{film._id}}">
 
 <div class="main1">
 <div class="row d-flex justify-content-center  ">
@@ -98,6 +98,19 @@
                 </div>
             </div>
         </section>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <p class="col-md-4">
+            <i class="fa fa-eye text-light"></i>
+                 {{film.view}} views
+            </div>
+        </p>
+    </div>
+    <div class="col-md-4">
+            {% include "/like-dislikes.twig" %}
     </div>
 </div>
 </div>
@@ -126,7 +139,7 @@
          }
      }, false);
     </script>
-    <script src="javascript/main.js"></script>
-{% endblock %}
   
+{% endblock %}
+    <script src="javascript/main.js"></script>
 
