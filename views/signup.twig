@@ -18,7 +18,7 @@
 
      <img src="/images/login.jpg" width="100%">
 
-     <div class="container" style=" width: 550px; position: absolute; margin-left: 900px; margin-top: -400px;">
+     <div class="container" style=" width: 600px; position: absolute; margin-left: 900px; margin-top: -550px;">
         <h1>Inscription</h1>
         {% if errorForm %}
           <ul class="text-light">
@@ -48,42 +48,46 @@
           {% endfor %}
         {% endif %}
 
-        <form class="row g-3"  action="" method="POST"enctype="multipart/form-data">
-            <div class="col-md-4">
+        <form class="row g-3 text-light"  action="" method="POST"enctype="multipart/form-data">
+            <div class="col-6 ">
               <label for="username" class="form-label">Nom utilisateur</label>
               <input type="text" id="username" placeholder="nodejs" name="username" class="form-control">
             </div>
-            <div class="col-md-4">
+            <div class="col-4 ">
+            </div>
+            <div class="col-4 mt-2">
               <label for="firstname" class="form-label">Nom</label>
               <input type="text" name="firstname" placeholder="firstname" id="firstname" class="form-control">
             </div>
-            <div class="col-9">
+            <div class="col-4 mt-2">
               <label for="lastname" class="form-label">Prénom</label>
               <input type="text" name="lastname" placeholder="lastname" id="lastname" class="form-control">
             </div>
-           
-            <div class="col-md-4">
+           <div class="col-4 ">
+            </div>
+            <div class="col-4 mt-2">
               <label for="email" class="form-label">email</label>
               <input type="email" name="email" placeholder="email" id="email" class="form-control">
             </div>
-            <div class="col-md-4">
+            <div class="col-6 ">
+            </div>
+            <div class="col-4 mt-2">
                 <label for="password" class="form-label">Mot de passe</label>
                 <input type="password" name="password" placeholder="password" id="password" class="form-control">
             </div>
-             <div class="col-md-4">
-                <label for="passwordConfirm" class="form-label">Répéter votre mot de passe </label>
+             <div class="col-4 mt-2">
+                <label for="passwordConfirm" class="form-label">Confirmer votre mdp </label>
                 <input type="password" name="passwordConfirm" placeholder="passwordConfirm" id="passwordConfirm" class="form-control">
             </div>
-            <div class="col-5  mb-3" style="margin-left:200px">
-                <label for="image">Image</label>
+            <div class="col-6 mt-4" >
+                <label for="image">Image profile</label>
                 <input type="file" class="form-control-file" id="image" name="image" multiple>
             </div>
-            <div class="col-12">
+            <div class="col-6 mt-3">
                  <button type="submit" class="btn btn-success mt-3">Sign up</button>
             </div>
           </form>
-           <div class="insc">
-                
+           <div class="insc mt-5">
                 <center><a href="/users/login"  style="color: white; "> Vous avez un compte Connecter vous ? </a> </center>
             </div> 
     </div> 

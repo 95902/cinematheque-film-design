@@ -4,6 +4,7 @@ const acteurModel = require("../models/acteur.modele");
 const categorieModel = require("../models/categories.modele");
 const anneeModel = require("../models/annee.model");
 const userModel = require("../models/user.model");
+const alert = require('express-flash-message');
 
 exports.film_pagination = async(requete, reponse)=>{
     
@@ -97,14 +98,15 @@ exports.liste_film_affichage = async (requete,reponse)=>{
     }
 }
 
-
+var idfilm;
 exports.film_details = (requete,reponse)=>{
+  
     filmModel.findById(requete.params.id)
         .populate("categorie")
         .populate("acteur")
         .exec()
         .then(film=>{
-             console.log("hello")
+           
             categorieModel.findById(film.categorie._id)
             .populate("films")
             .exec()
@@ -116,12 +118,14 @@ exports.film_details = (requete,reponse)=>{
                     $inc:{"view":1}
                  
                 };
+                idfilm=requete.params.id;
+                console.log(idfilm)
                 filmModel.updateOne({_id:requete.params.id},viewUpdate)
                 .exec()
                 .then(resultat => {
                    
-                console.log(resultat);
-                console.log(film);
+                // console.log(resultat);
+                // console.log(film);
                 reponse.render("films/film.html.twig",{film:film,
                     categorie:categorie
                 })
@@ -137,52 +141,132 @@ exports.film_details = (requete,reponse)=>{
 }
 
 exports.doLike = (requete,reponse)=>{
-   
 
-    if (requete.user){
-
-        //check
-
-        filmModel.findOne({_id:requete.params.id,likers:requete.user
-
-        },function(error,film){
-            if (film == null){
-                // envoye le like en bdd
-                const likers = {
-                     $push:{"likers":{
-                        _id:requete.user
-                        }
-                            
-                    },function(error,data){
-                        reponse.json({
-                            "status":"success",
-                            "message":"le film à été liker "
+     if (requete.user){
+         var film;
+            console.log(requete.user)
+            console.log(requete.user._id)
+            filmModel.findOne({"_id":idfilm,"likers._id":requete.user._id})
+                .exec()
+                .then(film => {
+                console.log(film)
+                    if(film == null ){
+                        // envoie base bdd
+                        const likers = {$push:{"likers":{_id:requete.user._id}}}
+                        filmModel.updateOne({_id:idfilm},likers)
+                        .exec()
+                        .then(resultat => {
+                                        
                         })
-
+                    
+                        reponse.json({
+                            "status":"error",
+                            "message":"Vous likez cette video "
+                        });
+                    }else{
+                        reponse.json({
+                            "status":"error",
+                            "message":"Vous avez déjà liker cette video "
+                        }) 
                     }
-                };   
-                filmModel.updateOne({_id:requete.params.id})
-
-
-            }else{
-                reponse.json({
-                    "status":"error",
-                    "message":"alaready like this movies"
-                })
-
-            }
-        })
-
+            })
     }else{
         reponse.json({
             "status":"error",
-            "message":"Connectez vous "
-        })
+            "message":"Connectez-vous "
+        });       
+        
     }
 
 
 
 }
+exports.dislikes = (requete,reponse)=>{
+
+    if (requete.user){
+        var film;
+           console.log(requete.user)
+           console.log(requete.user._id)
+           filmModel.findOne({"_id":idfilm,"dislikers._id":requete.user._id})
+               .exec()
+               .then(film => {
+               console.log(film)
+                   if(film == null ){
+                       // envoie base bdd
+                       const dislikers = {$push:{"dislikers":{_id:requete.user._id}}}
+                       filmModel.updateOne({_id:idfilm},dislikers)
+                       .exec()
+                       .then(resultat => {
+                                       
+                       })
+                   
+                       reponse.json({
+                           "status":"error",
+                           "message":"Vous n'avez pas aimer cette video "
+                       });
+                   }else{
+                       reponse.json({
+                           "status":"error",
+                           "message":"Vous avez déjà voter sur cette video "
+                       }) 
+                   }
+           })
+   }else{
+       reponse.json({
+           "status":"error",
+           "message":"Connectez-vous "
+       });       
+       
+   }
+
+
+
+}
+        //check
+
+    //     filmModel.findById(idfilm)
+
+    //     },function(error,film){
+    //         if (film == null){
+    //             // envoye le like en bdd
+            
+    //             console.log(film)
+    //             const likers = {
+    //                 likers:{_id:requete.user._id}
+    //             }
+    //             console.log(likers)
+    //                 filmModel.updateOne({_id:idfilmd},likers)
+    //                 .exec()
+    //                 .then(resultat => {
+    //                     console.log(resultat)
+    //                 })
+               
+
+    //             ,function(error,data){
+    //                 reponse.json({
+    //                     "status":"success",
+    //                     "message":"le film à été liker "
+    //                 });  
+    //             }
+    //         }else{
+    //             reponse.json({
+    //                 "status":"error",
+    //                 "message":"alaready like this movies"
+    //             })
+
+    //         }
+    //     })
+
+    // }else{
+    //     reponse.json({
+    //         "status":"error",
+    //         "message":"Connectez vous "
+    //     })
+//     }
+
+
+
+// }
 
 // exports.film_details = (requete,reponse)=>{
 //     filmModel.findById(requete.params.id)

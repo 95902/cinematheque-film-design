@@ -26,11 +26,12 @@ const flash = require('connect-flash');
 const User = require('./models/user.model');
 
 
+ serveur.use(require('cookie-parser')());
 serveur.use(session({
     secret: 'keyboard cat',
-    resave: true,
-    saveUninitialized: true,
-    cookie: { maxAge: 60000 }
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 6000000 }
 }))
 
 //Run  user connect 
@@ -110,7 +111,7 @@ serveur.set('views', path.join(__dirname, 'views'))
 serveur.set('view engine','twig');
 
 serveur.use(express.static("public"));
-serveur.use(bodyParser.urlencoded({extended:false}))
+serveur.use(bodyParser.urlencoded({extended:true}))
 serveur.set('trust proxy',1);
 
 

@@ -11,8 +11,8 @@ routeur.get("/films",film_controler.liste_film_affichage)
 routeur.get("/films/:id",film_controler.film_details)
 
 routeur.get('/films/:start/:limit',film_controler.film_pagination)
-routeur.post('/do-Like',film_controler.doLike)
-
+routeur.post("/doLike",film_controler.doLike)
+routeur.post("/doDisLike",film_controler.dislikes)
 
 
 module.exports = routeur;
