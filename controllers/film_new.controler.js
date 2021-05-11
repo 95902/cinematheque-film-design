@@ -5,12 +5,13 @@ const categorieModel = require("../models/categories.modele");
 const anneeModel = require("../models/annee.model");
 
 exports.liste_film_new_affichage = (requete,reponse)=>{ 
+    var limit = 8;
         anneeModel.find()
         .populate("annees")
         .exec()
         .then(annee=>{
             
-            filmModel.find( {annee: "608178f2dc46172c881b2721"},)
+            filmModel.find( {annee: "608178f2dc46172c881b2721"}.limit(limit),)
             .populate("categorie")
             .exec()
             .then(films=>{

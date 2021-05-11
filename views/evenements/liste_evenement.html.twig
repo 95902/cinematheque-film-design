@@ -105,7 +105,18 @@
                            html+=' </div>';
                     html+='</div>';
                     console.log(evenements[a].images);
-                
+
+                <div class="row row-cols-1 row-cols-md-4" id="pagination">
+                {% for evenement in liste %}
+                    <div class="col mb-4">
+                        <div class="card" style="background-color:#212121;border:none">
+                                <a style=" text-decoration: none; " href="/evenement/{{evenement._id}}">
+                            <img src="/images/{{evenement.image}}"class="card-img-top"><p style="opacity: 0.8;">{{evenement.titre}}<p>
+                                </a>
+                        </div>
+                    </div>
+                    {% endfor %}    
+                </div>
                     
 
                 }

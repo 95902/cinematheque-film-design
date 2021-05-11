@@ -34,6 +34,7 @@
     "passport-local-mongoose": "^6.1.0",
     "path": "^0.12.7",
     "random-token": "0.0.8",
+    "request": "^2.88.2",
     "socket.io": "^4.0.1",
     "strict-uri-encode": "^2.0.0",
     "twig": "^1.15.4"

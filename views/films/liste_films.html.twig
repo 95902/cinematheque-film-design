@@ -102,17 +102,15 @@
 
                     html+='<div class="row row-cols-8 row-cols-md-4" id="pagination">';
                             html+='<div class="col mb-4" style="width:100%">';
-                                html+='<div class="card" style="background-color:#170B22;">';
-                                        html+='<a href="/films/'+films[a]._id+'">';
-                                   html+=' <img src="/images/'+films[a].image+'"class="card-img-top">"'+films[a].titre+'"';
+                                html+='<div class="card" style="background-color:#212121;border:none">';
+                                        html+='<a style=" text-decoration: none; " href="/films/'+films[a]._id+'">';
+                                   html+=' <img src="/images/'+films[a].image+'"class="card-img-top"><p style="opacity: 0.8;">"'+films[a].titre+'"</p>';
                                         html+='</a>';
                                html+=' </div>';
                            html+=' </div>';
                     html+='</div>';
                     console.log(films[a].images);
-                
-                    
-
+                        
                 }
                 $('#pagination').html(html);
             }

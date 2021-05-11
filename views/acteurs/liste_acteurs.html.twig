@@ -55,7 +55,7 @@
 </div>
     <script>
         var start =0;
-        var limit = 1;
+        var limit = 8;
         function suivant(){
             start = start+limit;
             $.ajax({
@@ -94,9 +94,9 @@
 
                     html+='<div class="row row-cols-8 row-cols-md-4" id="pagination">';
                             html+='<div class="col mb-4" style="width:100%">';
-                                html+='<div class="card" style="background-color:#170B22;">';
-                                        html+='<a href="/acteurs/'+acteurs[a]._id+'">';
-                                   html+=' <img src="/images/'+acteurs[a].image+'"class="card-img-top">"'+acteurs[a].nom+'"';
+                                html+='<div class="card" style="background-color:#212121;border:none">';
+                                        html+='<a style=" text-decoration: none;"href="/acteurs/'+acteurs[a]._id+'">';
+                                   html+=' <img src="/images/'+acteurs[a].image+'"class="card-img-top"><p style="opacity: 0.8;"> "'+acteurs[a].nom+'"--"'+acteurs[a].prenom+'"</p>';
                                         html+='</a>';
                                html+=' </div>';
                            html+=' </div>';
