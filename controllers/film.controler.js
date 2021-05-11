@@ -58,7 +58,8 @@ exports.liste_film_affichage = async (requete,reponse)=>{
             });
 
         if(films.length < 1) {
-            noMatch = "Desolé aucun film ne corresponds";
+            noMatch = ' Désolé, aucun résultat ne correspond à votre recherche. <img src="/images/4-464-peur.png" width="600px" height="630px">';
+
         }
             reponse.render("films/liste_films.html.twig",{liste:films, noMatch: noMatch}); 
         })
