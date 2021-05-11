@@ -15,20 +15,16 @@
 
     {% else %} 
      <a href="/users/pageUser">
-      <center><img src="/images/log.png" width="150px" height="160px"></center>
-      <center><img src="/images/user.png" width="70px"><p>{{user.username}}</p></center><br><br> 
+      <center><img src="/images/log.png" width="120px" height="130px"></center>
+      <center><img src="/images/{{user.image}}" width="50px"><p>{{user.username}}</p></center><br><br> 
       </a>
-       <center><a href="/films">Films</a>
-      <a href="/films_new">Nouveau</a>
-      <a href="/acteurs">Acteurs</a>
-      <a href="/liste_salon">Salon</a> 
-      <a href="/admin_film">Admin_film</a></center>
-      <a href="/admin_acteur">Admin_acteur</a></center>
-      <a href="/categories">Categories</a></center>
-      <a href="/annees">Annees</a></center>
+      <a href="/admin_film">Film</a></center>
+      <a href="/admin_acteur">Acteur</a></center>
       <a href="/admin_evenement">Evenement</a></center>
       <a href="/users/admin_user">Utilisateur</a></center>
       <a href="/admin_salon">Salon</a></center>
+      <a href="/categories">Categories</a></center>
+      <a href="/annees">Annees</a></center>
       <a href="/users/logout">Deconexion</a></center>
     {% endif %}
   {% else %}

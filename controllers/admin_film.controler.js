@@ -53,6 +53,7 @@ exports.admin_film_detail=(requete,reponse)=>{
     .populate("acteur")
     .exec()
     .then(film=>{
+        console.log("hello");
         reponse.render("admin/detail_film.html.twig",{film:film,isModification:false})
     })
     .catch( error =>{
@@ -166,6 +167,9 @@ exports.admin_film_ajout =(requete,reponse)=>{
         Bdannonce:requete.body.Bdannonce,
         duree:requete.body.duree,
         Realisateur:requete.body.Realisateur,
+        view:requete.body.view,
+        likers:requete.body.likers,
+        dislikers:requete.body.dislikers,
         Pays:requete.body.Pays,
         image:requete.file.path.substring(14)
     });

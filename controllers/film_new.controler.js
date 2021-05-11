@@ -55,7 +55,7 @@ exports.film_details = (requete,reponse)=>{
             .populate("films")
             .exec()
             .then(categorie=>{
-            console.log(film)
+           
 
             reponse.render("films/film.html.twig",{film:film,
                 categorie:categorie

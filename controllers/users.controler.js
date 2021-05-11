@@ -71,11 +71,11 @@ module.exports = {
                         return res.redirect('/users/signup');
                     }
                     if(req.user.role == "admin"){
-                        req.flash('success', 'tu est connecté');
+                        req.flash('success', 'Vous êtes connecté');
                         return res.redirect('/admin_film');
                     }
                     if(req.user.role == "user"){
-                        req.flash('success', 'tu est connecté');
+                        req.flash('success', 'Vous êtes connecté');
                         return res.redirect('/');
                         
                     }

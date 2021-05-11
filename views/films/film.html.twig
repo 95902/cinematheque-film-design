@@ -22,30 +22,13 @@
                 </h5><br>
                 <h5  style="color:white;" > Pays:&ensp;{{film.Pays}}&emsp;&emsp;&emsp;&emsp; Réalisateur:&ensp;{{film.Realisateur}}</h5><br>
             </div><br>
-            
-            <div style="display: flex;">      
-                <input type="number" name="rating" id="rating-input" min="1" max="5" style="display: none;" />
-                 <h5 style="color:white">Note&emsp;&emsp;</h5><br>
-            <div class="rating" role="optgroup">
-                   
-                <!-- in Rails just use 1.upto(5) -->
                 
-                <i class="fa fa-star-o fa-1x rating-star" id="rating-1" data-rating="1" tabindex="0"
-                    aria-label="Rate as one out of 5 stars" role="radio"
-                    onmousedown=""></i>
-                <i class="fa fa-star-o fa-1x rating-star" id="rating-2" data-rating="2" tabindex="0"
-                    aria-label="Rate as two out of 5 stars" role="radio"
-                    onmousedown=""></i>
-                <i class="fa fa-star-o fa-1x rating-star" id="rating-3" data-rating="3" tabindex="0" role="radio"
-                    onmousedown=""></i>
-                <i class="fa fa-star-o fa-1x rating-star" id="rating-4" data-rating="4" tabindex="0"
-                    aria-label="Rate as four out of 5 stars" role="radio"
-                    onmousedown=""></i>
-                <i class="fa fa-star-o fa-1x rating-star" id="rating-5" data-rating="5" tabindex="0"
-                    aria-label="Rate as five out of 5 stars" role="radio"
-                    onmousedown=""></i>
-            </div>
-        </div>
+                <div class="col-8 mb-5">
+                    <p class="col-8">
+                        <i class="fa fa-eye text-light"></i>
+                            {{film.view}} views&emsp;&emsp;&emsp;&emsp; {% include "/like-dislikes.twig" %}                 
+                    </p>
+                </div>
                 <center><button type="button" class="mb-3 cBtnYouTube btn button1" data-bs-toggle="modal" data-bs-target="#oModalYouTube" data-url="{{film.Bdannonce}}" data-titre="{{film.titre}}">Regarder </button></center> 
                 <div class="modal fade" id="oModalYouTube" tabindex="-1" aria-labelledby="oModalYouTubeTitre" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -67,7 +50,7 @@
     </div>
 </div>
 <br><br> 
-
+<input type="hidden" id="film_id" value="{{film._id}}">
 
 <div class="main1">
 <div class="row d-flex justify-content-center  ">
@@ -98,9 +81,10 @@
                 </div>
             </div>
         </section>
+
     </div>
 </div>
-</div>
+
   
 
  <script>
@@ -126,7 +110,7 @@
          }
      }, false);
     </script>
-    <script src="javascript/main.js"></script>
-{% endblock %}
   
+{% endblock %}
+    <script src="javascript/main.js"></script>
 

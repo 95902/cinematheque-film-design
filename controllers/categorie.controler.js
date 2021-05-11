@@ -15,7 +15,7 @@ exports.categorie_affichages=(requete,response)=>{
             anneeModel.find()
             .exec()
             .then(annee=>{
-                console.log(categorie);
+                // console.log(categorie);
                 response.render("categories/categories.html.twig",{categorie:categorie, listecategories:categories ,listeannee:annee })
             })
             .catch( error =>{

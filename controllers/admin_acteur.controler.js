@@ -50,7 +50,7 @@ exports.admin_acteur_delet = (requete,reponse)=>{
         .where("nom").equals("anonyme")
         .exec()
         .then(acteur =>{
-            console.log(acteur);
+           
             filmModel.updateMany({"acteur":requete.params.id},{"$set":{"acteur":acteur[0]._id}},{"multi":true})
             .exec()
             .then(
@@ -80,7 +80,7 @@ exports.admin_acteur_modification = (requete,reponse)=>{
         .exec()
         .then(acteur=>{
             reponse.render("acteurs/acteur.html.twig",{ acteur:acteur,isModification:true});
-            console.log(acteur);
+           
     })
     .catch( error =>{
         console.log(error)
