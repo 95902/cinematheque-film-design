@@ -10,8 +10,8 @@ exports.liste_film_new_affichage = (requete,reponse)=>{
         .populate("annees")
         .exec()
         .then(annee=>{
-            
-            filmModel.find( {annee: "609b0e9d39a53409d87bf4c3"}).limit(limit)
+           
+            filmModel.find().sort({view:-1}).limit(limit)
             .populate("categorie")
             .exec()
             .then(films=>{

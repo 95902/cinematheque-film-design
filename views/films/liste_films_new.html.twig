@@ -34,7 +34,8 @@
                 <div class="col mb-4">
                     <div class="card" style="background-color:#212121;border:none">
                             <a style=" text-decoration: none; " href="/films/{{film._id}}">
-                        <img src="/images/{{film.image}}"class="card-img-top"><p style="opacity: 0.8;"> {{film.titre}}</p>
+                        <img src="/images/{{film.image}}"class="card-img-top"><p style="opacity: 0.8;"> {{film.titre}} &emsp; <i class="fa fa-eye text-light"></i>
+                            {{film.view}} </p>
                             </a>
                     </div>
                 </div>
@@ -67,7 +68,8 @@
                 </div>
             {% endfor %}   
             </div>
-           
+        </div>    
+</div>         
     <script>
         var start =0;
         var limit = 8;
@@ -100,12 +102,12 @@
         }
 
 
-        function affichage_films(films){
+        function affichage_films(film){
             
-            if(films.length> 0){
+            if(film.length> 0){
                  
                 var html = "";
-                for(var a= 0; a < films.length; a++ ){
+                for(var a= 0; a < film.length; a++ ){
 
                      html+='<div class="row row-cols-8 row-cols-md-4" id="pagination">';
                             html+='<div class="col mb-4" style="width:100%">';
