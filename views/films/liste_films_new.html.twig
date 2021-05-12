@@ -8,13 +8,13 @@
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img src="/images/4-9033-1017513.jpg" class="d-block w-100" alt="...">
+                <img src="/images/sans.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                <img src="/images/4-9033-1017513.jpg"class="d-block w-100" alt="...">
+                <img src="/images/lbd4cc627__w854.jpg"class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                <img src="/images/4-9033-1017513.jpg" class="d-block w-100" alt="...">
+                <img src="/images/lolo.png" class="d-block w-100" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -29,7 +29,7 @@
             {% if noMatch != null  %}
                 <h3 class="text-light">{{ noMatch }}</h3>
             {% endif %}
-            <div class="row row-cols-1 row-cols-md-4" id="pagination">
+            <div class="row row-cols-1 row-cols-md-4 mt-4" id="pagination">
                 {% for film in liste %}
                 <div class="col mb-4">
                     <div class="card" style="background-color:#212121;border:none">
@@ -110,8 +110,8 @@
                      html+='<div class="row row-cols-8 row-cols-md-4" id="pagination">';
                             html+='<div class="col mb-4" style="width:100%">';
                                 html+='<div class="card" style="background-color:#212121;border:none">';
-                                        html+='<a style=" text-decoration: none; " href="/films/'+films[a]._id+'">';
-                                   html+=' <img src="/images/'+films[a].image+'"class="card-img-top"><p style="opacity: 0.8;">"'+films[a].titre+'"</p>';
+                                        html+='<a style=" text-decoration: none; " href="/films/'+film[a]._id+'">';
+                                   html+=' <img src="/images/'+film[a].image+'"class="card-img-top"><p style="opacity: 0.8;">"'+film[a].titre+'"</p>';
                                         html+='</a>';
                                html+=' </div>';
                            html+=' </div>';

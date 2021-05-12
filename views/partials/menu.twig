@@ -3,7 +3,7 @@
 
     {% if user.role == "user"  %}
      <a href="/users/pageUser">
-      <center><img src="/images/log.png" width="150px" height="160px"></center>
+      <center><img src="/images/logo.png" width="150px" height="160px"></center>
       <center><img src="/images/{{user.image}}" width="70px"><p>{{user.username}}</p></center><br><br> 
       </a>
       <center><a href="/films">Films</a>
@@ -15,7 +15,7 @@
 
     {% else %} 
      <a href="/users/pageUser">
-      <center><img src="/images/log.png" width="120px" height="130px"></center>
+      <center><img src="/images/logo.png" width="120px" height="130px"></center>
       <center><img src="/images/{{user.image}}" width="50px"><p>{{user.username}}</p></center><br><br> 
       </a>
       <a href="/admin_film">Film</a></center>
