@@ -2,7 +2,7 @@
 {% block titre %}{{film.titre}} {% endblock %}
 {% block contenue %}
     {% if isModification %}
-        <form method="POST" action="/admin_film/modificationServer">
+        <form method="POST" class="text-light" action="/admin_film/modificationServer">
             <div class="row m-2">
                 <div class="col-6">
                     <h2>Informations : </h2>
@@ -80,7 +80,7 @@
             <input type="hidden" name="identifiant" value="{{film._id}}">
             <input type="submit" class="btn btn-primary w-100" style="margin-left:100px" value="Valider">
         </form>
-        <form method="POST" action="/admin_film/updateImage" enctype="multipart/form-data">
+        <form method="POST" action="/admin_film/updateImage" class="text-light" enctype="multipart/form-data">
             <input type="hidden" name="identifiant" value="{{film._id}}">
             <h2 style="margin-left:100px">Images : </h2>
             <div class="row"style="margin-left:100px">

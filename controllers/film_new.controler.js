@@ -10,8 +10,8 @@ exports.liste_film_new_affichage = (requete,reponse)=>{
         .populate("annees")
         .exec()
         .then(annee=>{
-            
-            filmModel.find( {annee: "608178f2dc46172c881b2721"}.limit(limit),)
+           
+            filmModel.find().sort({view:-1}).limit(limit)
             .populate("categorie")
             .exec()
             .then(films=>{
@@ -69,30 +69,3 @@ exports.film_details = (requete,reponse)=>{
         console.log(error)
     });
 }
-
-
-
-// exports.film_details = (requete,reponse)=>{
-//     filmModel.findById(requete.params.id)
-//     .populate("categorie")
-//     .populate("acteur")
-//     .exec()
-//     .then(film=>{
-//         console.log(film.categorie._id)
-//         categorieModel.findById(film.categorie._id)
-//         .exec()
-//         .then(categories=>{
-            
-
-//         reponse.render("films/film.html.twig",{film:film,categorie:categories,})
-//         console.log(film.categorie)
-//     })
-//     .catch( error =>{
-//         console.log(error)
-//     });
-// })
-// .catch( error =>{
-//     console.log(error)
-// });
-    
-// }

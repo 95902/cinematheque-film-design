@@ -6,7 +6,7 @@
     <div class="row" style="background-color:#212121">
         <div class="col-md-5 mt-3">
             <div>
-                <img alt="Web Studio" class="img-fluid" src="/images/{{film.image}}" />
+                <img alt="Web Studio" class="img-fluid" src="/images/{{film.image}}" width="516px" height="773px" />
             </div>
         </div>
         <div class="col-md-7  mt-5">
@@ -18,7 +18,8 @@
                 </p> <br>
                  <h5  style="color:white;" > Categories:&ensp;{{film.categorie.libelle}}&emsp;&emsp;&emsp;&emsp;Durée:&ensp;{{film.duree}}</h5><br>
                 <h5  style="color:white;text-decoration:none;" > Acteur : <a  href="/acteurs/{{film.acteur[0]._id}}"> {{film.acteur[0].nom}} - {{film.acteur[0].prenom}} </a> &emsp;
-                <a  href="/acteurs/{{film.acteur[1]._id}}"> {{film.acteur[1].nom}} - {{film.acteur[1].prenom}} </a>
+                <a  href="/acteurs/{{film.acteur[1]._id}}"> {{film.acteur[1].nom}} - {{film.acteur[1].prenom}} </a>&emsp;
+                <a  href="/acteurs/{{film.acteur[2]._id}}"> {{film.acteur[2].nom}} - {{film.acteur[2].prenom}} </a>
                 </h5><br>
                 <h5  style="color:white;" > Pays:&ensp;{{film.Pays}}&emsp;&emsp;&emsp;&emsp; Réalisateur:&ensp;{{film.Realisateur}}</h5><br>
             </div><br>
@@ -70,7 +71,7 @@
                         <div class="item popular-item">
                             <div class="thumb">
                             <a href="/films/{{film._id}}">
-                                <img src="/images/{{film.image}}" alt="">
+                                <img src="/images/{{film.image}}" alt="" >
                             </a>
                             </div>
                             <div class="text-white  text-content">
